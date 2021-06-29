@@ -30,15 +30,15 @@ public class AccessLogFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		//접속 정보를 출력 log처리
+		
 		HttpServletRequest req = (HttpServletRequest)request;
 		
 		String remote = StringUtils.defaultString(req.getRemoteAddr(), "-" );
-		//uri라서 http부터 안찍힘
+		
 		String uri = StringUtils.defaultString(req.getRequestURI(),"-");
 		String queryString = StringUtils.defaultString(req.getQueryString(),"");
 		
-		//header 정보
+		
 		
 		String referer = StringUtils.defaultString(req.getHeader("Refer"),"-");
 		String agent = StringUtils.defaultString(req.getHeader("User-Agent"),"-");
@@ -47,9 +47,7 @@ public class AccessLogFilter implements Filter {
 		String log = String.format("%s?%s : %s : %s : %s" ,uri,queryString,remote,referer,agent);
 		logger.info(log);
 		
-		//흐름제어 코드
-//		request.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
-		//캐시 지우는 것도 AOP
+
 		
 		chain.doFilter(request, response);
 		
