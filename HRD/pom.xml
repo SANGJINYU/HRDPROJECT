@@ -7,14 +7,14 @@
 	<name>HRD</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
-	<properties>
+<properties>
 		<java-version>11</java-version>
 		<org.springframework-version>4.3.25.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.6</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
 	<dependencies>
-		<!-- Spring -->
+		<!-- Spring MVC-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -32,13 +32,16 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+			
+			<!-- Spring Transaction 처리하는 tx -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>
 				
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>	
+				
+
 		
 		<!-- Logging -->
 		<dependency>
@@ -108,6 +111,113 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+	
+	
+		<!-- Persistence Layer인 myBatis 사용-->
+	<dependency>
+		<groupId>org.mybatis</groupId>
+		<artifactId>mybatis</artifactId>
+		<version>3.5.6</version>
+	</dependency>
+	
+	<!-- Oracle RDBMS를 연결하기 위한 드라이버 ojdbc -->
+	<dependency>
+		<groupId>com.oracle.database.jdbc</groupId>
+		<artifactId>ojdbc8</artifactId>
+		<version>21.1.0.0</version>
+	</dependency>
+	
+	<!-- myBatis를 Spring Bean으로 생성해주는  -->
+	
+	<dependency>
+	<groupId>org.mybatis</groupId>
+	<artifactId>mybatis-spring</artifactId>
+	<version>2.0.6</version>
+</dependency>
+	
+	<!-- Properties 파일을 Bean으로 등록 -->
+	<dependency>
+		<groupId>commons-dbcp</groupId>
+		<artifactId>commons-dbcp</artifactId>
+		<version>1.4</version>
+	</dependency>
+	
+	
+	<!-- aspect jlt, aspect weaver를 만들어주는 라이브러리(cc와 ccc를 합쳐주는 프로토콜) -->
+					
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj-version}</version>
+		</dependency>
+
+	<dependency>
+		<groupId>org.aspectj</groupId>
+		<artifactId>aspectjweaver</artifactId>
+		<version>${org.aspectj-version}</version>
+	</dependency>
+	
+	
+	<!-- String문자열을 쉽게 처리하기 위한 라이브러리 	-lang3, guava -->
+	<dependency>
+		<groupId>org.apache.commons</groupId>
+		<artifactId>commons-lang3</artifactId>
+		<version>3.12.0</version>
+	</dependency>
+	
+	<!-- Spring에서 Rest-Full 처리를 위한 JSON 변경 라이브러리  -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.12.3</version>
+	</dependency>
+
+<!-- databind 올리면 되는데 혹시 버전 안맞는 상황이 있을 수 있어서 jackson mapper 올려줬다 -->
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.9.13</version>
+	</dependency>
+	
+	<!-- 폼에서 입력한 값을 유효성 검증 / js로 검증했었는데 hibernate로 할 수 있다 -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-validator</artifactId>
+		<version>6.0.1.Final</version>
+	</dependency>
+	
+	<!-- Websocket javax 톰캣was 계열 -->
+	<dependency>
+		<groupId>javax.websocket</groupId>
+		<artifactId>javax.websocket-api</artifactId>
+		<version>1.1</version>
+		<scope>provided</scope>
+	</dependency>
+	
+	<!-- Spring Bean을 생성하는 Websocket broadcast해주는 애를 bean으로  -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-websocket</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>
+	
+	<!-- 메일(mail)의 STMP를 처리하기 위한 라이브러리 -->
+	<dependency>
+		<groupId>javax.mail</groupId>
+		<artifactId>mail</artifactId>
+		<version>1.4.7</version>
+	</dependency>
+	
+	
+	<!-- 다른 서버(외부)의 메일을 불러와야?하기때문에, Spring은 container 안에있는 것만 가져다 사용할 수 있기 때문에 -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-context-support</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>
+
+	
 	
 		<!-- Test -->
 		<dependency>
