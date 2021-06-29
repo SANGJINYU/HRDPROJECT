@@ -4,10 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메인</title>
 </head>
 <body>
-
-${serverTime}
+<%@include file="/WEB-INF/views/header.jsp" %>
+<div>
+	<h1>메인페이지</h1>
+</div>
+<%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
