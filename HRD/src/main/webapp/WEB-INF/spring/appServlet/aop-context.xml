@@ -10,7 +10,7 @@
 
 
 <aop:config>
-	<aop:pointcut expression="execution(public *  com.hrd.edu.model.*Dao*.*(..))"  id="daoPoint"/>
+	<aop:pointcut expression="execution(public *  com.hrd.edu.model.dao.*Dao*.*(..))"  id="daoPoint"/>
 	<aop:aspect ref="daoLogger">
 		<aop:before method="before" pointcut-ref="daoPoint"/>
 		<aop:after-returning method="afterReturning" pointcut-ref="daoPoint"/>
