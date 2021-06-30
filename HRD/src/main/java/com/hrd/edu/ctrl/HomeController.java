@@ -8,9 +8,4 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String main() {
-		
-		return "main";
-	}
 }
