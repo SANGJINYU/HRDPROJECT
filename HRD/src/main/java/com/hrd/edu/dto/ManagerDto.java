@@ -31,9 +31,12 @@ public class ManagerDto {
 		this.auth = auth;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "ManagerDto [id=" + id + "]";
+		return "ManagerDto [id=" + id + ", inst_ino=" + inst_ino + ", password=" + password + ", name=" + name
+				+ ", email=" + email + ", phone=" + phone + ", auth=" + auth + ", counselDto=" + counselDto + "]";
 	}
 
 
