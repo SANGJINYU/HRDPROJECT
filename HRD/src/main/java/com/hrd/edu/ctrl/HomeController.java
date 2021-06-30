@@ -13,4 +13,12 @@ public class HomeController {
 		
 		return "main";
 	}
+	
+	@RequestMapping(value = "/loginForm.do", method = RequestMethod.GET)
+	public String loginForm() {
+		return "login";
+	}
+	
+	
+	
 }

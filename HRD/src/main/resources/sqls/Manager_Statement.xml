@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hrd.edu.model.dao.ManagerDaoImpl">
+
+<!-- 마스터 회원가입 -->
+<insert id="master_Insert" parameterType="manager_Dto">
+INSERT INTO MANAGER (ID,INST_INO,PASSWORD,NAME,EMAIL,PHONE,AUTH)
+                VALUES(#{id},#{inst_ino},#{password},#{name},#{email},#{phone},'M')
+</insert>
+
+<!-- 마스터가 (담당자)계정생성 -->
+<insert id="manager_Insert" parameterType="manager_Dto">
+INSERT INTO MANAGER (ID,INST_INO,PASSWORD,NAME,EMAIL,PHONE,AUTH)
+                VALUES(#{id},#{inst_ino},#{password},#{name},#{email},#{phone},'Y')
+</insert>
+
+
+<!-- 담당자 로그인 -->
+<select id="manager_Login" parameterType="manager_Dto" resultType="manager_Dto">
+SELECT ID, INST_INO ,NAME ,EMAIL ,PHONE 
+        FROM MANAGER m 
+        WHERE ID=#{id} AND PASSWORD =#{password} AND AUTH != 'N'
+</select>
+
+
+<!-- (관리자) 아이디 중복체크 -->
+<select id="manager_IdChk" parameterType="java.lang.String" resultType="java.lang.Integer">
+SELECT COUNT(ID)
+        FROM MANAGER m 
+        WHERE ID=#{id}
+</select>
+
+
+<!-- 마스터가 (담당자)목록보기 -->
+<select id="manager_ManagerList" parameterType="java.lang.String" resultType="manager_Dto">
+SELECT ID,INST_INO,AUTH
+        FROM MANAGER m 
+        WHERE INST_INO =#{inst_ino}
+</select>
+
+
+<!-- (담당자)상세 정보 보기 -->
+<select id="manager_DetailInfo" parameterType="java.lang.String" resultType="manager_Dto">
+SELECT ID,NAME ,EMAIL ,PHONE,AUTH, INST_INO 
+        FROM MANAGER m
+        WHERE ID=#{id} AND AUTH='Y'
+</select>
+
+
+<!-- (담당자) 비밀번호 변경 -->
+<update id="manager_ModifyPw" parameterType="java.util.Map">
+UPDATE MANAGER SET PASSWORD=#{npw}
+        WHERE AUTH ='Y' AND PASSWORD=#{opw} AND ID=#{id}
+</update>
+
+<!-- (담당자) 정보 변경 -->
+<update id="manager_ModifyInfo" parameterType="java.util.Map">
+UPDATE TRAINEE SET PHONE='010-5555-9999', ADDR='신중동', DETAIL_ADDR ='신중동 어딘가'
+        WHERE DELFLAG ='N'  AND ID='GD002'
+</update>
+
+
+<!-- (담당자) 계정 상태 변경(M/Y/N) -->
+<update id="manager_MofifyAuth" parameterType="java.util.Map">
+UPDATE MANAGER SET AUTH =#{auth}
+        WHERE ID =#{id}
+</update>
+
+</mapper>
