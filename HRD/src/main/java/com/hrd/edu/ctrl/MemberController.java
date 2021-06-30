@@ -39,16 +39,21 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST)
-	public String login(TraineeDto dto, Model model, HttpSession session) {
+	public String login(TraineeDto dto, HttpSession session,String id, String pw) {
 		
-		logger.info("MemberController 로그인 {}", dto);
-		
+		logger.info("MemberController 로그인 {}	", dto);
+
 		TraineeDto tDto = service.trainee_Login(dto);
+		System.out.println(tDto);
 		
-		session.setAttribute("t_info", tDto);
-		
-		return "main";
-		
+		if(tDto == null) {
+
+			return "redirect:/logout.do";
+			
+		}else {
+			session.setAttribute("t_info", tDto);
+			return "redirect:/traineeMain.do";
+		}
 	}
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
