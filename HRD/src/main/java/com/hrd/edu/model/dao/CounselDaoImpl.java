@@ -29,6 +29,12 @@ public class CounselDaoImpl implements ICounselDao {
 	}
 	
 	@Override
+	public int counsel_getCounselCount(Map<String, Object> map) {
+		log.info("CounselDaoImpl counsel_getCounselCount (공통) 일정개수 {}",map);
+		return sqlSession.selectOne(NS+"counsel_getCounselCount", map);
+	}
+	
+	@Override
 	public boolean trainee_CounselBook(CounselDto2 dto) {
 		log.info("CounselDaoImpl trainee_CounselBook (사용자) 상담 예약 신청 {}",dto);
 		int n = sqlSession.insert(NS+"trainee_CounselBook",dto);
@@ -90,6 +96,8 @@ public class CounselDaoImpl implements ICounselDao {
 		int n = sqlSession.update(NS+"manager_CounselUpdate", seq);
 		return (n>0)?true:false;
 	}
+
+	
 
 	
 	
