@@ -14,7 +14,7 @@
 <div>
 <div class="container" style="width: 400px;">
   <h2>회원가입</h2>
-  <form action="./signUpForm.do">
+  <form action="./signUpForm.do" method="post">
     <div class="form-group">
       <label for="id">아이디:</label>
       <input type="text" class="form-control" id="id" name="id">
@@ -29,12 +29,20 @@
       <input type="text" class="form-control" id="name" name="name">
     </div>
     <div class="form-group">
+      <label for="email">이메일:</label>
+      <input type="text" class="form-control" id="email" name="email">
+    </div>
+     <div class="form-group">
+      <label for="phone">전화번호:</label>
+      <input type="text" class="form-control" id="phone" name="phone">
+    </div>
+    <div class="form-group">
       <label for="addr" >주소:</label>
       <input type="text" class="form-control" id="addr" name="addr">
     </div>
     <div class="form-group">
       <label for="detailAddr" >상세주소:</label>
-      <input type="text" class="form-control" id="detailAddr" name="detailAddr">
+      <input type="text" class="form-control" id="detail_addr" name="detail_addr">
     </div>
     <input type="button" class="btn btn-primary" value="회원가입" onclick="signUp()">
   </form>

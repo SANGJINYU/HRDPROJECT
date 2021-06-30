@@ -38,7 +38,6 @@ a{
 width: 800px;
 
 }
-
 </style>
 </head>
 <body>
