@@ -29,5 +29,6 @@ public interface ITraineeDao {
 	
 	//사용자 계정 상태 변경(탈퇴)
 	public boolean trainee_DelUser(String id);
+
 	
 }
