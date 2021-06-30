@@ -4,10 +4,8 @@
 
 	<typeAliases>
 		<typeAlias type="com.hrd.edu.dto.CounselDto" alias="counsel_Dto"/>
-	</typeAliases>
-
-	<typeAliases>
 		<typeAlias type="com.hrd.edu.dto.TraineeDto" alias="trainee_Dto"/>
+		<typeAlias type="com.hrd.edu.dto.ManagerDto" alias="manager_Dto"/>
 	</typeAliases>
 
 	<mappers>
