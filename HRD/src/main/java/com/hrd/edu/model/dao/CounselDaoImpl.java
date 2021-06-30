@@ -9,7 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.hrd.edu.dto.CounselDto;
+import com.hrd.edu.dto.CounselDto2;
+import com.hrd.edu.dto.ManagerDto;
 
 
 @Repository
@@ -22,7 +23,13 @@ public class CounselDaoImpl implements ICounselDao {
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	public boolean trainee_CounselBook(CounselDto dto) {
+	public List<CounselDto2> counsel_getCalViewList(Map<String, Object> map) {
+		log.info("CounselDaoImpl counsel_getCalViewList (공통) 달별 일별 리스트 {}",map);
+		return sqlSession.selectList(NS+"counsel_getCalViewList", map);
+	}
+	
+	@Override
+	public boolean trainee_CounselBook(CounselDto2 dto) {
 		log.info("CounselDaoImpl trainee_CounselBook (사용자) 상담 예약 신청 {}",dto);
 		int n = sqlSession.insert(NS+"trainee_CounselBook",dto);
 		return (n>0)?true:false;
@@ -43,29 +50,29 @@ public class CounselDaoImpl implements ICounselDao {
 	}
 
 	@Override
-	public List<CounselDto> trainee_CounselLists(String id) {
+	public List<CounselDto2> trainee_CounselLists(String id) {
 		log.info("CounselDaoImpl trainee_CounselLists (사용자) 상담 예약 목록 조회 {}", id);
 		return sqlSession.selectList(NS+"trainee_CounselLists");
 	}
 
 	@Override
-	public CounselDto trainee_CounselDetail(Map<String, Object> map) {
+	public CounselDto2 trainee_CounselDetail(Map<String, Object> map) {
 		log.info("CounselDaoImpl trainee_CounselDetail (사용자) 상담 예약 상세 조회 {}", map);
-		CounselDto dto = null;
+		CounselDto2 dto = null;
 		dto = sqlSession.selectOne(NS+"trainee_CounselDetail", map);
 		return dto;
 	}
 
 	@Override
-	public List<CounselDto> manager_CounselLists(String m_id) {
+	public List<ManagerDto> manager_CounselLists(String m_id) {
 		log.info("CounselDaoImpl manager_CounselLists (담당자) 상담 예약 목록 조회 {}", m_id);
 		return sqlSession.selectList(NS+"manager_CounselLists");
 	}
 
 	@Override
-	public CounselDto manager_CounselDetail(Map<String, Object> map) {
+	public ManagerDto manager_CounselDetail(Map<String, Object> map) {
 		log.info("CounselDaoImpl manager_CounselDetail (담당자) 상담 예약 상세 조회 {}", map);
-		CounselDto dto = null;
+		ManagerDto dto = null;
 		dto = sqlSession.selectOne(NS+"manager_CounselDetail", map);
 		return dto;
 	}
@@ -83,6 +90,8 @@ public class CounselDaoImpl implements ICounselDao {
 		int n = sqlSession.update(NS+"manager_CounselUpdate", seq);
 		return (n>0)?true:false;
 	}
+
+	
 	
 	
 	

@@ -1,0 +1,48 @@
+@charset "UTF-8";
+a{
+		text-decoration: none;
+	}
+	
+	#calendar{
+		border: 1px solid #ccc;
+		border-collapse: collapse;
+		margin: auto;
+	}
+	
+	#calendar th{
+		width: 80px;
+		border: 1px solid #ccc;
+	}
+	
+	#calendar td{
+		width: 80px;
+		height: 80px;
+		border: 1px solid #ccc;
+		text-align: left;
+		vertical-align: top;
+		position: relative;
+	}
+	
+	.clist>p{
+		font-size: 5px;
+		margin : 2px;
+		background-color: #FFE2FD;
+		border-radius: 2px;
+	}
+	
+	.cPreview{
+		position: absolute;
+		background-color: #EA4A7C;
+		top: -30px;
+		left: 10px;
+		opacity: 0.8;
+		
+		width: 40px;
+		height: 40px;
+		
+		color:white;		
+		font-weight: bold;
+		text-align: center;
+		line-height: 40px;
+		border-radius: 40px 40px 40px 1px;
+	}
