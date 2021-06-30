@@ -29,6 +29,12 @@ public class CounselServiceImpl implements ICounselService {
 	}
 	
 	@Override
+	public int counsel_getCounselCount(Map<String, Object> map) {
+		log.info("CounselServiceImpl counsel_getCounselCount (공통) 일정개수 {}", map);
+		return dao.counsel_getCounselCount(map);
+	}
+	
+	@Override
 	public boolean trainee_CounselBook(CounselDto2 dto) {
 		log.info("CounselServiceImpl trainee_CounselBook (사용자) 상담 예약 신청 {}", dto);
 		return dao.trainee_CounselBook(dto);

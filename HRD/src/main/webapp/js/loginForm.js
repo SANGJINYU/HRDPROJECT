@@ -11,6 +11,8 @@ window.onload = function(){
 
 
 function loginForm(){
+	var rdo  = document.getElementsByName("rdoBtn");
+
 	
 	var id = document.getElementById("id");
 	var pw = document.getElementById("pw");

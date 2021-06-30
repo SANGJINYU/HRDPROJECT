@@ -10,6 +10,9 @@ public interface ICounselDao {
 
 	// 공통 _ 달별 일별 리스트
 	public List<CounselDto2> counsel_getCalViewList(Map<String, Object> map);
+	
+	//공통 _ 일정개수
+	public int counsel_getCounselCount(Map<String, Object> map);
 
 	// (사용자) 상담 예약 신청
 	public boolean trainee_CounselBook(CounselDto2 dto);

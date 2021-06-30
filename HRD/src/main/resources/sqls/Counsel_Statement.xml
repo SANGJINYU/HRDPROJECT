@@ -4,22 +4,23 @@
 
 <!-- 공통 달별 일별 리스트 -->
 <select id="counsel_getCalViewList" parameterType="java.util.Map" resultType="counsel_Dto">
-	SELECT SEQ, ID, CONTENT, MDATE, REGDATE
+	SELECT SEQ, ID, CONTENT, MDATE, REGDATE, FLAG 
 	FROM (
 		SELECT ROW_NUMBER() OVER(PARTITION BY SUBSTR(MDATE,1,8) ORDER BY MDATE) rn
-			, SEQ, ID, CONTENT, MDATE, REGDATE
+			, SEQ, ID, CONTENT, MDATE, REGDATE, FLAG 
 			FROM COUNSEL c 
-			WHERE ID=#{id} AND SUBSTR(MDATE,1,6) = #{yyyymm}
+			WHERE SUBSTR(MDATE,1,6) = #{yyyymm} AND FLAG ='B' OR FLAG ='C'
 	)
 	WHERE rn BETWEEN 1 AND 2
 </select>
 
 <!-- 공통 일정개수 -->
-<select id="getCounselCount" parameterType="counsel_Dto">
+<select id="counsel_getCounselCount" parameterType="counsel_Dto" resultType="java.lang.Integer">
 	SELECT COUNT(*)
 		FROM COUNSEL c
-		WHERE AND SUBSTR(MDATE,1,8)=#{yyyymmdd};
+		WHERE SUBSTR(MDATE,1,8)=#{yyyymmdd};
 </select>
+
 <!-- (사용자) 상담 예약 신청 -->
 <insert id="trainee_CounselBook" parameterType="counsel_Dto">
 INSERT INTO COUNSEL
@@ -82,7 +83,7 @@ SELECT c.SEQ ,c.ID ,CONTENT , DEGR ,TRPR_ID ,TRPR_NM ,REGDATE ,FLAG ,MDATE ,m.NA
         AND c.ID =#{id}  AND c.SEQ =#{seq}
 </select>
 
-<!-- 매니저 하나에 counsel 정보 여러게 리스트!!!!! -->
+<!-- 매니저 하나에 counsel 정보 여러개 리스트!!!!! -->
 <resultMap type="com.hrd.edu.dto.ManagerDto" id="managerJoinDto">
 	<result property="m_id" column="ID"/>
 	<collection property="counselDto" resultMap="counselDto"/>

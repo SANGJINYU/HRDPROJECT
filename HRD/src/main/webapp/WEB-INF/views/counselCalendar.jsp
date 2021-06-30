@@ -1,3 +1,5 @@
+<%@page import="com.hrd.edu.model.service.CounselServiceImpl"%>
+<%@page import="com.hrd.edu.model.service.ICounselService"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.hrd.edu.dto.CounselDto2"%>
@@ -17,11 +19,6 @@
 <body>
 <%@ include file="./header.jsp" %>
 <%
-//request param의 전달
-// 	String id = request.getParameter("id");
-// 	id = (String)session.getAttribute("id"); //redirect로 보냈으니까
-// 	System.out.println("아이디 아직 못함"+id);
-
 	//현재 날짜의 년도와 월을 가져옴
 	Calendar cal = Calendar.getInstance();
 	int year = cal.get(Calendar.YEAR);
@@ -63,27 +60,19 @@
 	//이전달력계산을 위한 세팅
 	cal.set(year,month-1-1, 1);
 	int beforelastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-	//달력에 필요한 게시글 정보를 가져오는 Dao를 실행
-	ICounselDao dao = new CounselDaoImpl();
-	//필요한 입력 형태를 만들어 줌
-	//id, yyyymm
 	
 	String yyyymm=year+CalendarUtil.twoWord(month);
 	System.out.printf("%s. %s, %s \n", year, month, yyyymm);
 	
-	//년도 월의 게시글을 가져옴
-	////mvc1형태
-// 	Map<String, Object> map = new HashMap<String, Object>();
-// 	map.put("id", "user04");
-// 	map.put("yyyymm", "202107");
-// 	List<CounselDto2> cList = dao.counsel_getCalViewList(map);
 	
-// 	System.out.print(cList);
+	List<CounselDto2> lists = (List<CounselDto2>)session.getAttribute("cList");
+
+
 %>
 <div id="container">
 <h2> 상담 일정 예약 게시판 </h2>
-${trainee.id}
+${t_info}
+${cList}
 	<table id="calendar">
 		<caption style="text-align: center;font-size:17pt;">
 				<a href="./counselCalendar.do?year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -126,8 +115,10 @@ ${trainee.id}
 						
 						<!-- 해당 일의 게시글 3개를 출력 -->
 						<div class = "clist">
-<%-- 							<%request.getAttribute("cList");%> --%>
-<%-- 							<%=CalendarUtil.getCalView(i,cList) %> --%>
+<%-- 						<%CounselDto2 cdto = (CounselDto2)session.getAttribute("cList"); %> --%>
+							<%=CalendarUtil.getCalView(i,lists) %>
+<%-- 							${cList} --%>
+							
 						</div>
 						</td>
 						

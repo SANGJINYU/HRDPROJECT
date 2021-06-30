@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.hrd.edu.comm.CalendarUtil;
+import com.hrd.edu.dto.CounselDto;
 import com.hrd.edu.dto.CounselDto2;
 import com.hrd.edu.dto.TraineeDto;
 import com.hrd.edu.model.service.ICounselService;
@@ -28,16 +30,15 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	private ICounselService service;
 	
 	@RequestMapping(value="/counselCalendar.do", method=RequestMethod.GET)
-	public String counselCalendar(Map<String, Object> map,  HttpSession session, HttpServletRequest request, TraineeDto dto) {
-		log.info("CounselController counselCalendar 상담 예약 달력 게시판 메인페이지");
+	public String counselCalendar(Map<String, Object> map,  HttpSession session, HttpServletRequest request, CounselDto2 cdto) {
+		log.info("CounselController counselCalendar 상담 예약 달력 게시판 메인페이지 {}",map);
 		
-		session.setAttribute("trainee", dto); 
-		
-		map.put("id", "user04");
-		map.put("yyyymm", "202107");
+		CounselDto2 dto = null;
+		cdto.getMdate();
 		
 		List<CounselDto2> cList = service.counsel_getCalViewList(map);
-		request.setAttribute("cList", cList);
+		session.setAttribute("cList", cList);
+		
 		return "counselCalendar";
 	}
 	
