@@ -1,8 +1,6 @@
 package com.hrd.edu.dto;
 
-import java.util.List;
-
-public class ManagerDto {
+public class ManagerDto2 {
 
 	private String id;
 	private String inst_ino;
@@ -12,14 +10,13 @@ public class ManagerDto {
 	private String phone;
 	private String auth;
 	
-	private List<CounselDto> counselDto;
 
-	public ManagerDto() {
+	public ManagerDto2() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-
-	public ManagerDto(String id, String inst_ino, String password, String name, String email, String phone,
+	public ManagerDto2(String id, String inst_ino, String password, String name, String email, String phone,
 			String auth) {
 		super();
 		this.id = id;
@@ -31,9 +28,12 @@ public class ManagerDto {
 		this.auth = auth;
 	}
 
+
+
+
 	@Override
 	public String toString() {
-		return "ManagerDto [id=" + id + "]";
+		return "ManagerDto2 [id=" + id + ", name=" + name + ", email=" + email + ", phone=" + phone + "]";
 	}
 
 
