@@ -34,7 +34,7 @@ height: 300px;
 	 	<input type="radio" name="rdoBtn">기관 담당자
     <div class="form-group">
       <label for="email">아이디:</label>
-      <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" name="id">
+      <input type="text" class="form-control" id="id" placeholder="아이디를 입력하세요" name="id">
     </div>
     <div class="form-group">
       <label for="pwd">비밀번호:</label>

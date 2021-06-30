@@ -17,6 +17,8 @@ function loginForm(){
 	var id = document.getElementById("id");
 	var pw = document.getElementById("pw");
 	
+	var rdo  = document.getElementsByName("rdoBtn");
+	
 	var frm = document.forms[0];
 	console.log(frm);
 		
@@ -26,6 +28,10 @@ function loginForm(){
 		id.focus();
 	}else if(rdo[0].checked){ //사용자 체크
 		frm.action= "./memberLogin.do";
+		frm.method="post";
+		frm.submit();
+	}else if(rdo[1].checked){// 담당자 체크
+		frm.action="./managerLogin.do";
 		frm.method="post";
 		frm.submit();
 	}

@@ -17,7 +17,7 @@ INSERT INTO MANAGER (ID,INST_INO,PASSWORD,NAME,EMAIL,PHONE,AUTH)
 
 <!-- 담당자 로그인 -->
 <select id="manager_Login" parameterType="manager_Dto" resultType="manager_Dto">
-SELECT ID, INST_INO ,NAME ,EMAIL ,PHONE 
+SELECT ID, INST_INO ,PASSWORD ,NAME ,EMAIL ,PHONE ,AUTH
         FROM MANAGER m 
         WHERE ID=#{id} AND PASSWORD =#{password} AND AUTH != 'N'
 </select>
