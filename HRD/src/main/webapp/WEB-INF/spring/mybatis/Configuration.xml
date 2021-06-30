@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
+
+	<typeAliases>
+		<typeAlias type="com.hrd.edu.dto.CounselDto" alias="counsel_Dto"/>
+	</typeAliases>
+
 	<typeAliases>
 		<typeAlias type="com.hrd.edu.dto.TraineeDto" alias="trainee_Dto"/>
 	</typeAliases>
-	
+
 	<mappers>
 		<mapper resource="/sqls/Counsel_Statement.xml"/>
 		<mapper resource="/sqls/Interest_Statement.xml"/>
