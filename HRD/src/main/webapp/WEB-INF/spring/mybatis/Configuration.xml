@@ -12,6 +12,8 @@
 		<mapper resource="/sqls/Counsel_Statement.xml"/>
 		<mapper resource="/sqls/Interest_Statement.xml"/>
 		<mapper resource="/sqls/Member_Statement.xml"/>
+		<mapper resource="/sqls/Manager_Statement.xml"/>
+
 	</mappers>
 	
 </configuration>
