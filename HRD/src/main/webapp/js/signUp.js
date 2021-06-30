@@ -53,15 +53,20 @@ function idChk(){
 }
 
 function inputPw(){
-	
-	var regex = /^(?=.*[A-Za-z0-9])(?=.*[.!@#$%^&*])(?=.[0-9A-Za-z]).{8,20}$/
-	var val = document.getElementById("pw");
+	var regex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^~*+=-])(?=.*[0-9]).{8,20}$/;
+	var val = document.getElementById("pw").value;
 	if(!regex.test(val)){
 		alert("문자,숫자,특수문자의 조합으로 8자 이상 입력해주세요");
 		document.getElementById("pw").value='';
 	}else{
 		alert("사용가능한 비밀번호입니다.")
 	}
+}
+
+function signUp(){
+	
+	var frm = document.forms[0];
+	frm.submit();
 }
 
 //$(document).ready(function(){

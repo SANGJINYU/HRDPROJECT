@@ -24,9 +24,9 @@ public class MemberController {
 	
 	
 
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/traineeMain.do", method = RequestMethod.GET)
 	public String main() {
-		
+		logger.info("MemberController traineeMain 이동");
 		return "main";
 	}
 	
@@ -38,14 +38,14 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST)
 	public String login(TraineeDto dto, Model model, HttpSession session) {
 		
 		logger.info("MemberController 로그인 {}", dto);
 		
 		TraineeDto tDto = service.trainee_Login(dto);
 		
-		session.setAttribute("trainee", tDto);
+		session.setAttribute("t_info", tDto);
 		
 		return "main";
 		
@@ -80,6 +80,24 @@ public class MemberController {
 		boolean isc = service.trainee_IdChk(id);
 		
 		return String.valueOf(isc);
+		
+	}
+	
+	@RequestMapping(value = "/signUpForm.do", method = RequestMethod.POST)
+	public String signUpForm(TraineeDto dto) {
+		
+		boolean isc = service.trainee_Insert(dto);
+		
+		if(isc) {
+			
+			return "redirect:/loginForm.do";
+			
+		}else {
+			
+			return "javascript:alert('회원가입실패하셨어요')";
+			
+		}
+		
 		
 	}
 	

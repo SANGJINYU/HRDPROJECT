@@ -29,9 +29,9 @@ height: 300px;
 <div class="container">
   <div class="loginForm">
     <h2>로그인</h2>
-  <form action="./login.do" method="post">
-	    <input type="radio" class="trainee" name="trainee">회원
-	 	<input type="radio" class="manager" name="manager">기관 담당자
+  <form>
+	    <input type="radio" name="rdoBtn" checked="checked">회원
+	 	<input type="radio" name="rdoBtn">기관 담당자
     <div class="form-group">
       <label for="email">아이디:</label>
       <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" name="id">
@@ -42,7 +42,8 @@ height: 300px;
     </div>
     <input class="btn btn-primary" type="button" name="login" value="로그인" onclick="loginForm()">
     <input class="btn btn-info" type="button" name="signUp" value="회원가입" onclick="location.href='./signUp.do'">
-    
+    <input class="btn btn-warning"  type="button" value="아이디 찾기">
+	<input class="btn btn-danger" type="button" value="비밀번호 찾기">
   </form>
   </div>
 </div>
