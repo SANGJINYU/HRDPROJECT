@@ -12,6 +12,8 @@ window.onload = function(){
 
 function loginForm(){
 	
+	var rdo  = document.getElementsByName("rdoBtn");
+	
 	var id = document.getElementById("id");
 	var pw = document.getElementById("pw");
 	
@@ -19,7 +21,7 @@ function loginForm(){
 	
 	var frm = document.forms[0];
 	console.log(frm);
-	
+		
 	
 	if(id.value == "" || pw.value==""){
 		alert("로그인 정보를 입력해주세요");

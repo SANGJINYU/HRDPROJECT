@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hrd.edu.dto.CounselDto;
+import com.hrd.edu.dto.CounselDto2;
+import com.hrd.edu.dto.ManagerDto;
 import com.hrd.edu.model.dao.ICounselDao;
 
 
@@ -21,7 +23,13 @@ public class CounselServiceImpl implements ICounselService {
 	private ICounselDao dao;
 
 	@Override
-	public boolean trainee_CounselBook(CounselDto dto) {
+	public List<CounselDto2> counsel_getCalViewList(Map<String, Object> map) {
+		log.info("CounselServiceImpl counsel_getCalViewList (공통) 달별 일별 리스트 {}", map);
+		return dao.counsel_getCalViewList(map);
+	}
+	
+	@Override
+	public boolean trainee_CounselBook(CounselDto2 dto) {
 		log.info("CounselServiceImpl trainee_CounselBook (사용자) 상담 예약 신청 {}", dto);
 		return dao.trainee_CounselBook(dto);
 	}
@@ -39,25 +47,25 @@ public class CounselServiceImpl implements ICounselService {
 	}
 
 	@Override
-	public List<CounselDto> trainee_CounselLists(String id) {
+	public List<CounselDto2> trainee_CounselLists(String id) {
 		log.info("CounselServiceImpl trainee_CounselLists (사용자) 상담 예약 목록 조회 {}", id);
 		return dao.trainee_CounselLists(id);
 	}
 
 	@Override
-	public CounselDto trainee_CounselDetail(Map<String, Object> map) {
+	public CounselDto2 trainee_CounselDetail(Map<String, Object> map) {
 		log.info("CounselServiceImpl trainee_CounselDetail (사용자) 상담 예약 상세 조회 {}", map);
 		return dao.trainee_CounselDetail(map);
 	}
 
 	@Override
-	public List<CounselDto> manager_CounselLists(String m_id) {
+	public List<ManagerDto> manager_CounselLists(String m_id) {
 		log.info("CounselServiceImpl manager_CounselLists (담당자) 상담 예약 목록 조회 {}", m_id);
 		return dao.manager_CounselLists(m_id);
 	}
 
 	@Override
-	public CounselDto manager_CounselDetail(Map<String, Object> map) {
+	public ManagerDto manager_CounselDetail(Map<String, Object> map) {
 		log.info("CounselServiceImpl manager_CounselDetail (담당자) 상담 예약 상세 조회 {}", map);
 		return dao.manager_CounselDetail(map);
 	}
@@ -73,5 +81,7 @@ public class CounselServiceImpl implements ICounselService {
 		log.info("CounselServiceImpl manager_CounselShare (마스터) 예약신청 배분 {}", seq);
 		return dao.manager_CounselShare(seq);
 	}
+
+	
 	
 }

@@ -2,6 +2,7 @@
  * 
  */
 window.onload = function(){
+
 	
 	var rdo = document.getElementsByName("rdoBtn");
 
@@ -16,27 +17,22 @@ window.onload = function(){
 function searchInfo(){
 
 	$("#resulttable>tbody").html("");
-	
+	$("#resulttable").attr('style', "display:inline;");
 	var search = document.getElementById("search").value;
 //	var inst = document.getElementById("inst").value;
 	
 
-	var url = "http://www.hrd.go.kr/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp?returnType=XML"
-	+ "&authKey=zTTgDhnacOrKYEU7PyiCIPquwdPOJFDO&"
-	+ "pageNum=1&"
-	+ "pageSize=100&";
-	
+	var url = "http://www.hrd.go.kr/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp?returnType=XML&authKey=zTTgDhnacOrKYEU7PyiCIPquwdPOJFDO&pageNum=1&pageSize=100&";
 	var strdate = document.getElementById("strdate").value;
 	var enddate = document.getElementById("enddate").value;
 	
-	var cstrDate = strdate.replace(/-/g,'');
+	var cstrDate = strdate.replace(/-/g,'')
 	var cendDate = enddate.replace(/-/g,'')
 	
+
 	var trpr = document.getElementsByName("rdoBtn")[0];
 	var inst = document.getElementsByName("rdoBtn")[1];
-	
-	console.log(cstrDate);
-	console.log(cendDate);
+
 	
 	url += "srchTraStDt="+cstrDate+"&" //모집 시작 시작일
 	url += "srchTraEndDt="+cendDate+"&" // 모집 종료 ?
@@ -55,7 +51,6 @@ function searchInfo(){
 	url += "srchTraProcessNm="+search+"&"
 	}
 	url += "srchTraGbn=00";
-	
 //	var srchTraArea1 = document.getElementById("upperAreaCd").value;
 //		url += "srchTraArea1="+srchTraArea1;
 //	var srchTraArea2 = document.getElementById("areaCd").value;
@@ -67,8 +62,6 @@ function searchInfo(){
 //	url += "&srchKeco1="+srchKeco1;
 //    }
 //	console.log(srchTraArea1+","+srcthTraArea2 +","+ srchKeco1+","+date);
-
-	
 
 	$.ajax({
 		type: "get",
@@ -83,7 +76,6 @@ function searchInfo(){
 				if(key == "info"){
 					var list = value;
 					$.each(list, function(k, v){
-						
 //					  console.log(list.length);
 //			
 //					$("#resulttable>tbody").html("<tr></tr>");
@@ -112,6 +104,11 @@ function searchInfo(){
 //					$("#resulttable>tbody>tr").children().eq(i).text(v. Object.keys(v)[i]);
 //					
 //				}		
+
+//append
+//tbody 만들어서 tr 만들고 append  tbody에 붙이고 전체를 table에 붙여 넣음
+
+
 							$("#resulttable").attr('style', "display:inline;");
 							html = "<tr>"
 							html += "	<td>"+v.address+"</td>"
@@ -126,12 +123,16 @@ function searchInfo(){
 //							html += "	<td>"+v.trprId+"</td>"
 							html += "	<td>"+v.trprDegr+"</td>"						
 //							html += " 	<input value='"+v.trprDegr+"' name='v.trprDegr' type='hidden'>"
-							html += "	<td><a href='./detail.do?url='"+url+"''>"+v.trprNm+"</a></td>"
+//							html += "	<td><a href='./detail.do?url="+url+"'>"+v.trprNm+"</a></td>"
+							html += "	<td><a onclick='courseDetail()'>"+v.trprNm+"</a></td>"
 //							html += "	<td>"+v.trtm+"</td>"
 //							html += "	<td>"+v.traStartDate+"</td>"
 //							html += "	<td>"+v.traEndDate+"</td>"
 //							html += "	<td>"+v.yardMan+"</td>"
+							html += "	<td><input class = 'btn btn-primary' type ='button'  value ='관심' onclick='myInterest()'></td>"
+							html += "	<td><input class = 'btn btn-primary' type ='button'  value ='상세보기' onclick='courseDetail()'></td>"
 							html += "</tr>"
+							
 						$("#resulttable>tbody").append(html);
 					});
 				}
@@ -141,15 +142,85 @@ function searchInfo(){
 			alert("잘못된 요청")
 		}
 	})
+	
+	
+	
 	alert("종료!");
 	return false;
 }
 
-function getFormatDate(date){
-    var year = date.getFullYear();              //yyyy
-    var month = (1 + date.getMonth());          //M
-    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-    var day = date.getDate();                   //d
-    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+function courseDetail(){
+	$.ajax({
+		type: "get",
+		url: "./search.do",
+		data:{
+			"url" : url
+		},
+		dataType: "json",
+		success: function(data){
+			$.each(data, function(key, value){
+				var html = "";
+				if(key == "info"){
+					var list = value;
+					$.each(list, function(k, v){
+
+//append
+//tbody 만들어서 tr 만들고 append  tbody에 붙이고 전체를 table에 붙여 넣음
+
+							$("#resulttable").attr('style', "display:inline;");
+							html = "<tr>"
+							html += "	<td>"+v.address+"</td>"
+//							html += "	<td>"+v.addr1+"</td>"
+//							html += "	<td><a href= '"+v.hpAddr+"'>"+v.hpAddr+"</a></td>" //innerHTML로 
+//							html += "	<td>"+v.instIno+"</td>"
+							html += "	<td>"+v.subTitle+"</td>"
+							html += "	<td>"+v.trDcnt+"</td>"
+							html += "	<td>"+v.trprChap+"</td>"
+							html += "	<td>"+v.trprChapEmail+"</td>"
+							html += "	<td>"+v.trprChapTel+"</td>"
+//							html += "	<td>"+v.trprId+"</td>"
+							html += "	<td>"+v.trprDegr+"</td>"						
+//							html += "	<td><a href='./detail.do?url="+url+"'>"+v.trprNm+"</a></td>"
+							html += "	<td>"+v.trprNm+"</td>"
+							html += "	<td>"+v.trtm+"</td>"
+							html += "	<td>"+v.traStartDate+"</td>"
+							html += "	<td>"+v.traEndDate+"</td>"
+							html += "	<td>"+v.yardMan+"</td>"
+							html += "	<td><input class = 'btn btn-primary' type ='button'  value ='관심' onclick='myInterest()'></td>"
+							html += "</tr>"
+							
+						$("#detailResult").append(html);
+					});
+				}
+			});
+		},
+		error:function(){
+			alert("잘못된 요청")
+		}
+	})
+	
+	
+	
+	alert("종료!");
+	return false;
 }
+
+
+
+
+function myInterest(){
+	
+	alert("관심 과정 등록")
+
+
+}
+
+//function getFormatDate(date){
+//    var year = date.getFullYear();              //yyyy
+//    var month = (1 + d	ate.getMonth());          //M
+//    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+//    var day = date.getDate();                   //d
+//    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+//
+//    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+//}

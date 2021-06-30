@@ -38,7 +38,7 @@ height: 300px;
     </div>
     <div class="form-group">
       <label for="pwd">비밀번호:</label>
-      <input type="password" class="form-control" id="pw" placeholder="비밀번호를 입력하세요" name="password">
+      <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호를 입력하세요" >
     </div>
     <input class="btn btn-primary" type="button" name="login" value="로그인" onclick="loginForm()">
     <input class="btn btn-info" type="button" name="signUp" value="회원가입" onclick="location.href='./signUp.do'">

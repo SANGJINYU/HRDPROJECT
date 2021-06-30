@@ -35,9 +35,10 @@ a{
 
 #info{
 
-width: 800px;
+width: 1200px;
 
 }
+
 </style>
 </head>
 <body>
@@ -46,7 +47,7 @@ width: 800px;
 	<form action="./search.do" method="get">
 	<div class='form-group'>
 			<div class="rdo">
-				<input type="radio" name="rdoBtn"  checked="checked">과정명 검색 
+				<input type="radio"  name="rdoBtn"  checked="checked">과정명 검색 
 				<input type="radio" name="rdoBtn">기관명 검색
 			</div>
 			<div class="date">
@@ -74,6 +75,7 @@ width: 800px;
 		<tbody>
 		</tbody>
 	</table>
+	<div id="detailResult"></div>
 	</div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
