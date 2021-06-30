@@ -1,0 +1,51 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+<script type="text/javascript" src="./js/loginForm.js"></script>
+<style type="text/css">
+
+
+.form-group{
+	
+	width: 400px;
+}
+
+.loginForm{
+
+margin-left: 300px;
+margin-top: 50px;
+height: 300px;
+}
+
+
+</style>
+</head>
+<body>
+<%@include file="/WEB-INF/views/header.jsp" %>
+<div class="container">
+  <div class="loginForm">
+    <h2>로그인</h2>
+  <form action="./login.do" method="post">
+	    <input type="radio" class="trainee" name="trainee">회원
+	 	<input type="radio" class="manager" name="manager">기관 담당자
+    <div class="form-group">
+      <label for="email">아이디:</label>
+      <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" name="id">
+    </div>
+    <div class="form-group">
+      <label for="pwd">비밀번호:</label>
+      <input type="password" class="form-control" id="pw" name="pw" placeholder="비밀번호를 입력하세요" name="password">
+    </div>
+    <input class="btn btn-primary" type="button" name="login" value="로그인" onclick="loginForm()">
+    <input class="btn btn-info" type="button" name="signUp" value="회원가입" onclick="location.href='./signUp.do'">
+    
+  </form>
+  </div>
+</div>
+<%@include file="/WEB-INF/views/footer.jsp" %>
+</body>
+</html>

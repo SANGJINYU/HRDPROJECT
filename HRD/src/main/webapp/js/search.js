@@ -1,10 +1,21 @@
 /**
  * 
  */
+window.onload = function(){
+	
+	var rdo = document.getElementsByName("rdoBtn");
+
+	
+	if(rdo[1].checked){
+		rdo[0].checked= false;
+		rdo[1].checked = true;
+	}
+}
+
 
 function searchInfo(){
 
-//	$("#resulttable>tbody").html("");
+	$("#resulttable>tbody").html("");
 	
 	var search = document.getElementById("search").value;
 //	var inst = document.getElementById("inst").value;
@@ -21,8 +32,12 @@ function searchInfo(){
 	var cstrDate = strdate.replace(/-/g,'');
 	var cendDate = enddate.replace(/-/g,'')
 	
+	var trpr = document.getElementsByName("rdoBtn")[0];
+	var inst = document.getElementsByName("rdoBtn")[1];
+	
 	console.log(cstrDate);
 	console.log(cendDate);
+	
 	url += "srchTraStDt="+cstrDate+"&" //모집 시작 시작일
 	url += "srchTraEndDt="+cendDate+"&" // 모집 종료 ?
 	url += "outType=1&"// 반환 1 리스트 2 상세
@@ -34,8 +49,11 @@ function searchInfo(){
 	url += "crseTracseSe=C0055&" // 내일배움카드
 	url += "srchKeco1=20&"// 정보통신
 	url += "srchTraArea1=11&"; //서울
+	if(inst.checked){
+	url += "srchTraOrganNm="+search+"&" // 기관명
+	}else{
 	url += "srchTraProcessNm="+search+"&"
-//	url += "srchTraOrganNm="+search+"&" // 기관명
+	}
 	url += "srchTraGbn=00";
 	
 //	var srchTraArea1 = document.getElementById("upperAreaCd").value;
@@ -50,7 +68,7 @@ function searchInfo(){
 //    }
 //	console.log(srchTraArea1+","+srcthTraArea2 +","+ srchKeco1+","+date);
 
-	$("#resulttable").attr('style', "display:inline;");
+	
 
 	$.ajax({
 		type: "get",
@@ -94,25 +112,25 @@ function searchInfo(){
 //					$("#resulttable>tbody>tr").children().eq(i).text(v. Object.keys(v)[i]);
 //					
 //				}		
-//								
+							$("#resulttable").attr('style', "display:inline;");
 							html = "<tr>"
 							html += "	<td>"+v.address+"</td>"
-							html += "	<td>"+v.addr1+"</td>"
-							html += "	<td><a href= '"+v.hpAddr+"'>"+v.hpAddr+"</a></td>" //innerHTML로 
-							html += "	<td>"+v.instIno+"</td>"
+//							html += "	<td>"+v.addr1+"</td>"
+//							html += "	<td><a href= '"+v.hpAddr+"'>"+v.hpAddr+"</a></td>" //innerHTML로 
+//							html += "	<td>"+v.instIno+"</td>"
 							html += "	<td>"+v.subTitle+"</td>"
 							html += "	<td>"+v.trDcnt+"</td>"
 							html += "	<td>"+v.trprChap+"</td>"
 							html += "	<td>"+v.trprChapEmail+"</td>"
 							html += "	<td>"+v.trprChapTel+"</td>"
-							html += "	<td>"+v.trprId+"</td>"
+//							html += "	<td>"+v.trprId+"</td>"
 							html += "	<td>"+v.trprDegr+"</td>"						
-//						html += " 	<input value='"+v.trprDegr+"' name='v.trprDegr' type='hidden'>"
-							html += "	<td>"+v.trprNm+"</td>"
-							html += "	<td>"+v.trtm+"</td>"
-							html += "	<td>"+v.traStartDate+"</td>"
-							html += "	<td>"+v.traEndDate+"</td>"
-							html += "	<td>"+v.yardMan+"</td>"
+//							html += " 	<input value='"+v.trprDegr+"' name='v.trprDegr' type='hidden'>"
+							html += "	<td><a href='./detail.do?url='"+url+"''>"+v.trprNm+"</a></td>"
+//							html += "	<td>"+v.trtm+"</td>"
+//							html += "	<td>"+v.traStartDate+"</td>"
+//							html += "	<td>"+v.traEndDate+"</td>"
+//							html += "	<td>"+v.yardMan+"</td>"
 							html += "</tr>"
 						$("#resulttable>tbody").append(html);
 					});

@@ -13,7 +13,7 @@ footer{
 	color: white;
 	background-color: #333;
 	position: relative;	
-	top: 450px;
+	top: 200px;
 	border-radius: 3px;
 }
 
