@@ -38,7 +38,7 @@ UPDATE COUNSEL
 </select>
 
 <!-- 하나씩나와하나씩!!!!! -->
-<resultMap type="com.min.edu.dto.CounselDto2" id="traineeJoinDto">
+<resultMap type="com.hrd.edu.dto.CounselDto2" id="traineeJoinDto">
 	<result property="seq" column="SEQ"/>
 	<result property="id" column="ID"/>
 	<result property="content" column="CONTENT"/>
@@ -52,7 +52,7 @@ UPDATE COUNSEL
 	<collection property="managerDto" resultMap="managerDto"/>
 </resultMap>
 
-<resultMap type="com.min.edu.vo.ManagerDto2" id="managerDto">
+<resultMap type="com.hrd.edu.dto.ManagerDto2" id="managerDto">
 	<result property="id" column="ID"/>
 	<result property="name" column="NAME"/>
 	<result property="email" column="EMAIL"/>
@@ -68,11 +68,11 @@ SELECT c.SEQ ,c.ID ,CONTENT , DEGR ,TRPR_ID ,TRPR_NM ,REGDATE ,FLAG ,MDATE ,m.NA
 </select>
 
 <!-- 매니저 하나에 counsel 정보 여러게 리스트!!!!! -->
-<resultMap type="com.min.edu.vo.ManagerDto" id="managerJoinDto">
+<resultMap type="com.hrd.edu.dto.ManagerDto" id="managerJoinDto">
 	<result property="id" column="ID"/>
 	<collection property="counselDto" resultMap="counselDto"/>
 </resultMap>
-<resultMap type="com.min.edu.dto.CounselDto" id="counselDto">
+<resultMap type="com.hrd.edu.dto.CounselDto" id="counselDto">
 	<result property="seq" column="SEQ"/>
 	<result property="id" column="ID"/>
 	<result property="content" column="CONTENT"/>
