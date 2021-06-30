@@ -3,7 +3,7 @@
 <configuration>
 
 	<typeAliases>
-		<typeAlias type="com.hrd.edu.dto.CounselDto" alias="counsel_Dto"/>
+		<typeAlias type="com.hrd.edu.dto.CounselDto2" alias="counsel_Dto"/>
 		<typeAlias type="com.hrd.edu.dto.TraineeDto" alias="trainee_Dto"/>
 		<typeAlias type="com.hrd.edu.dto.ManagerDto" alias="manager_Dto"/>
 	</typeAliases>

@@ -7,7 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<link rel="stylesheet" type="text/css" href="./css/Counsel.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js""></script>
+<script type="text/javascript" src="./js/login.js"></script>
+
+
 </head>
 <header>
 <div id= "container">
@@ -19,7 +24,7 @@
     <ul class="nav navbar-nav">
       <li ><a href="./traineeMain.do">Home</a></li>
       <li ><a  href="#">과정 </a></li>
-      <li><a href="#">게시판</a></li>
+      <li><a href="./counselCalendar.do">게시판</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <c:if test="${t_info == null && m_info == null}">
