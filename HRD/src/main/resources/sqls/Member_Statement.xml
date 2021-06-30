@@ -1,4 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.hrd.edu.model.dao.MemberDaoImpl">
+
+<!-- 사용자 회원가입 -->
+<insert id="trainee_Insert" parameterType="trainee_Dto">
+INSERT INTO TRAINEE (ID,EMAIL,PW,PHONE,NAME,ADDR,DETAIL_ADDR,DELFLAG,AUTH)
+                VALUES(#{id},#{email},#{pw},#{phone},#{name},#{addr},#{detail_addr},'N','N')
+</insert>
+
+
+<!-- 사용자 로그인 -->
+<select id="trainee_Login" parameterType="trainee_Dto" resultType="trainee_Dto">
+SELECT ID,EMAIL,NAME,PHONE,ADDR ,DETAIL_ADDR 
+        FROM TRAINEE t 
+        WHERE ID=#{id} AND PW =#{pw} AND DELFLAG='N'
+</select>
+
+<!-- (사용자) 아이디 중복체크 -->
+<select id="trainee_IdChk" parameterType="java.lang.String" resultType="java.lang.Integer">
+SELECT COUNT(ID)
+        FROM TRAINEE t 
+        WHERE ID=#{id}
+</select>
+
+<!-- (사용자) 아이디 찾기 -->
+<select id="trainee_SearchId" parameterType="java.lang.String" resultType="java.lang.String">
+SELECT ID
+        FROM TRAINEE t 
+        WHERE EMAIL=#{email} AND DELFLAG ='N'
+</select>
+
+<!-- (사용자) 비밀번호 찾기 -->
+<select id="trainee_SearchPw" parameterType="trainee_Dto" resultType="java.lang.String">
+SELECT PW
+        FROM TRAINEE t 
+        WHERE ID=#{id} AND EMAIL=#{email} AND DELFLAG ='N'
+</select>
+
+<!-- (사용자) 내정보 보기 -->
+<select id="trainee_DetailInfo" parameterType="java.lang.String" resultType="trainee_Dto">
+SELECT ID,EMAIL ,PHONE ,NAME ,ADDR ,DETAIL_ADDR
+        FROM TRAINEE t 
+        WHERE ID=#{id}
+</select>
+
+<!-- (사용자) 정보 변경 -->
+<insert id="trainee_modifyInfo" parameterType="java.util.Map">
+UPDATE TRAINEE SET PHONE=#{phone}, ADDR=#{addr}, DETAIL_ADDR =#{detail_addr}
+        WHERE DELFLAG ='N'  AND ID=#{id}
+</insert>
+
+<!-- (사용자) 계정 상태 변경(탈퇴) -->
+<update id="trainee_DelUser" parameterType="java.lang.String">
+UPDATE TRAINEE SET DELFLAG ='Y'
+        WHERE ID=#{id}
+</update>
+
+
 </mapper>
