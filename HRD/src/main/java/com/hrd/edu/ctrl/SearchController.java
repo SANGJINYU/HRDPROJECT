@@ -107,4 +107,12 @@ public class SearchController {
 		
 		return result.toString(); 
 	}
+	
+	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String detail(String url, Model model) {
+		
+		
+		return "detail";
+	}
 }
