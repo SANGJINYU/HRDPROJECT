@@ -16,7 +16,7 @@
     <div class="form-group">
       <label for="id">아이디:</label>
       <input type="text" class="form-control" id="id" name="id">
-      <input type="button" class="btn btn-info" value="중복확인" onclick="idChk()">
+      <input type="button" class="btn btn-info" value="중복확인" onclick="m_idChk()">
     </div>
     <div class="form-group">
       <label for="pw">비밀번호:</label>
@@ -39,7 +39,7 @@
       <input type="text" class="form-control" id="inst_ino" name="inst_ino">
     </div>
 
-    <input type="button" class="btn btn-primary" value="회원가입" onclick="signUp()">
+    <input type="button" class="btn btn-primary" value="회원가입" onclick="m_signUp()">
   </form>
 </div>
 </div>

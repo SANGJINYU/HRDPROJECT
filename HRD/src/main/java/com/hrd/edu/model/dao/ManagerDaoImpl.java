@@ -37,8 +37,8 @@ public class ManagerDaoImpl implements IManagerDao {
 
 	@Override
 	public boolean manager_IdChk(String id) {
-		int n=sqlSession.selectOne(NS+"manager_IdChk", id);
-		return (n>0)?false:true;
+		int n = sqlSession.selectOne(NS+"manager_IdChk", id);
+		return (n>0)?true:false; 
 	}
 
 	@Override

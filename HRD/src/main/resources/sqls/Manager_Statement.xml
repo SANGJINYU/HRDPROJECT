@@ -43,24 +43,24 @@ SELECT ID ,NAME ,EMAIL ,PHONE ,AUTH
 <select id="manager_DetailInfo" parameterType="java.lang.String" resultType="manager_Dto">
 SELECT ID,NAME ,EMAIL ,PHONE,AUTH, INST_INO 
         FROM MANAGER m
-        WHERE ID=#{id} AND AUTH='Y'
+        WHERE ID=#{id}
 </select>
 
 
 <!-- (담당자) 비밀번호 변경 -->
 <update id="manager_ModifyPw" parameterType="java.util.Map">
 UPDATE MANAGER SET PASSWORD=#{npw}
-        WHERE AUTH ='Y' AND PASSWORD=#{opw} AND ID=#{id}
+        WHERE AUTH ='Y' AND PASSWORD=#{pw} AND ID=#{id}
 </update>
 
 <!-- (담당자) 정보 변경 -->
 <update id="manager_ModifyInfo" parameterType="java.util.Map">
-UPDATE TRAINEE SET PHONE='010-5555-9999', ADDR='신중동', DETAIL_ADDR ='신중동 어딘가'
-        WHERE DELFLAG ='N'  AND ID='GD002'
+UPDATE MANAGER SET NAME=#{name}, EMAIL=#{email}, PHONE=#{phone}, AUTH=#{auth}
+        WHERE ID=#{id}
 </update>
 
 
-<!-- (담당자) 계정 상태 변경(M/Y/N) -->
+<!-- (담당자) 계정 상태 변경(M/Y/N) 사용x -->
 <update id="manager_MofifyAuth" parameterType="java.util.Map">
 UPDATE MANAGER SET AUTH =#{auth}
         WHERE ID =#{id}
