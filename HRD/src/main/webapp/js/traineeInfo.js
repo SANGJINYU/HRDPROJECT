@@ -12,3 +12,15 @@ function modifyTrainee(){
 	
 	
 }
+
+
+function modifyManager(){
+	var isc= confirm("수정하시겠습니까?");
+	if(isc==true){
+		return "location.href='./modifyManager.do'";
+	}else{
+		alert("수정 실패");
+		return;
+	}
+	
+}
