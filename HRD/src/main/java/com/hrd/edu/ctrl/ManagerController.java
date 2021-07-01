@@ -43,6 +43,12 @@ public class ManagerController {
 		return isc?"loginForm":"javascript:alert('계정 생성 실패')";    //??
 	}
 	
+	//매니저 리스트에서 매니저생성 페이지 이동
+	@RequestMapping(value = "/managerInsertform.do",method = RequestMethod.GET)
+	public String manager_InsertForm() {
+		return "managerSignUpForm2";
+	}
+	
 	//마스터로그인 후 상담사 계정생성
 	@RequestMapping(value = "/managerInsert.do", method = RequestMethod.POST)
 	public String manager_Insert(ManagerDto dto) {
@@ -110,7 +116,7 @@ public class ManagerController {
 	public String manager_modifyInfo(@RequestParam Map<String,Object> map) {
 		boolean isc=mService.manager_ModifyInfo(map);
 	
-		return isc?"main":"managerModifyInfo";
+		return isc?"managerMain":"managerModifyInfo";
 	}
 	
 	

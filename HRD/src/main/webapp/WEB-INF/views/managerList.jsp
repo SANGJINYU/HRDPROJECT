@@ -60,7 +60,8 @@
 	</c:forEach>
 </table>
 <div class="bt_area">
-<button onclick="javascript:history.back(-1)">뒤로가기</button>
+	<button onclick="location.href='./managerInsertform.do'">계정생성</button>
+	<button onclick="javascript:history.back(-1)">뒤로가기</button>
 </div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
