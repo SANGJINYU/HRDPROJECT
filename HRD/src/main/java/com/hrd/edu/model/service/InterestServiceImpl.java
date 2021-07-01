@@ -19,4 +19,10 @@ public class InterestServiceImpl implements IInterestService {
 		return dao.myInterest(map);
 	}
 
+
+	@Override
+	public boolean outcome(Map<String, Object> map) {
+		return dao.outcome(map);
+	}
+
 }

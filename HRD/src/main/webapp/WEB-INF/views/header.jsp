@@ -24,7 +24,9 @@
     </div>
     <ul class="nav navbar-nav">
       <li ><a href="./traineeMain.do">Home</a></li>
-      <li ><a  href="#">과정 </a></li>
+       <c:if test="${t_info != null && m_info == null}">
+      <li ><a  href="./interestList.do">나의 관심 </a></li>
+      </c:if>
       <li><a href="./counselCalendar.do">게시판</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -49,8 +51,5 @@
   </div>
 </nav>
 </div>
-
-
-
 </header>
 </html>

@@ -10,8 +10,9 @@
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div>
 <div class="container" style="width: 400px;">
+${dto}
   <h2>상세 정보</h2>
-  <form action="./signUpForm.do" method="post">
+  <form action="./modifyInfo.do" method="post">
     <div class="form-group">
       <label for="id">아이디:</label>
       <input type="text" class="form-control" id="id" name="id" value="${t_info.id}" readonly>
@@ -36,8 +37,8 @@
       <label for="detailAddr" >상세주소:</label>
       <input type="text" class="form-control" id="detail_addr" name="detail_addr" value="${t_info.detail_addr}" readonly>
     </div>
-    <input type="button" class="btn btn-primary" value="정보 수정" onclick="modifyTrainee()">
-    <input type="button" class="btn btn-warning" value="탈퇴" onclick="delTrainee()">
+    <input type="button" class="btn btn-primary" id="modify"value="정보 수정" onclick="modifyTrainee()">
+    <input type="button" class="btn btn-danger" id="complete" value="수정 완료" onclick="resultInfo()" style="display: none">
     <input type="button" class="btn btn-info" value="뒤로가기" onclick="javascript:history.back(-1)">
     
   </form>
