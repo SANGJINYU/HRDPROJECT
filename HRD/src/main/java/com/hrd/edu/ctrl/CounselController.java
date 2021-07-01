@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.hrd.edu.comm.CalendarUtil;
 import com.hrd.edu.dto.CounselDto;
 import com.hrd.edu.dto.CounselDto2;
+import com.hrd.edu.dto.ManagerDto;
 import com.hrd.edu.dto.TraineeDto;
 import com.hrd.edu.model.service.ICounselService;
 
@@ -31,33 +32,32 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	private ICounselService service;
 	
 	@RequestMapping(value="/counselCalendar.do", method=RequestMethod.GET)
-	public String counselCalendar(@RequestParam Map<String, Object> map,  HttpSession session) {
+	public String counselCalendar(@RequestParam Map<String, Object> map,  HttpSession session,HttpServletRequest request) {
 		log.info("CounselController counselCalendar 상담 예약 달력 게시판 메인페이지 {}",map);
 		
+		Calendar cal = Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH)+1;
+		
+		String paramYear = request.getParameter("year");
+		String paramMonth = request.getParameter("month");
+		
+		System.out.printf("%s. %s \n", paramYear, paramMonth);
+		
+		if(paramYear != null){
+			year = Integer.parseInt(paramYear);
+		}
+		if(paramMonth != null){
+			month = Integer.parseInt(paramMonth);
+		}
+		cal.set(year,month-1, 1);
 
-//		CounselDto2 dto = null;
-//		cdto.getMdate();
-//		map.put("yyyymm", "202107");
-
-//		System.out.println(cdto.getcListMdate());
-//		
-//		dto.setMdate(cdto.getMdate());
-//		String yyyymm = dto.getMdate();
-//		System.out.println(yyyymm);
-//		System.out.println(map);
+		String yyyymm=year+CalendarUtil.twoWord(month);
+		System.out.printf("%s. %s, %s \n", year, month, yyyymm);
 		
-		
-//		map.put("yyyymm", year+date);
-		
-		
-		String year = (String)map.get("year");
-		String month = (String)map.get("month");
-//		String date = (String)map.get("date");
-		
-		String yyyymm = year+month;
-		String y = (String)map.get("year");
-		String mm = CalendarUtil.twoWord(Integer.parseInt(yyyymm));
 		map.put("yyyymm", yyyymm);
+		
+		System.out.println("--------------map : =========="+map);
 		
 		List<CounselDto2> cList = service.counsel_getCalViewList(map);
 		System.out.println(cList);
@@ -65,6 +65,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		return "counselCalendar";
 	}
+
 	
 	@RequestMapping(value="/counselBook.do", method=RequestMethod.GET)
 	public String counselBook(HttpServletRequest request) {
@@ -83,8 +84,6 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		System.out.printf("%d %d %d \n", lastDay, hour, minute);
 		
 		request.setAttribute("lastDay", lastDay);
-		request.setAttribute("hour", hour);
-		request.setAttribute("minute", minute);
 		
 		
 		return "counselBookForm";
@@ -115,10 +114,30 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	}
 		
 	@RequestMapping(value="/manager_CounselLists.do", method=RequestMethod.GET)
-	public String manager_CounselLists() {
-		log.info("CounselController manager_CounselLists (담당자) 상담 예약 글 목록");
-
-		return "";
+	public String manager_CounselLists(HttpSession session, HttpServletRequest request) {
+		ManagerDto m_info = (ManagerDto)session.getAttribute("m_info");
+		log.info("CounselController manager_CounselLists (담당자) 상담 예약 글 목록 {}",m_info);
+		String id = m_info.getId();
+		System.out.println(id);
+		
+		int year = Integer.parseInt(request.getParameter("year").trim()); //공백들어가면 오류나니까 꼭 trim()
+		int month = Integer.parseInt(request.getParameter("month"));
+		int date = Integer.parseInt(request.getParameter("date"));
+		
+		GregorianCalendar gcal = new GregorianCalendar();
+		gcal.set(year,month-1,date);
+		
+		int lastDay = gcal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		int hour = gcal.get(Calendar.HOUR_OF_DAY);
+		int minute = gcal.get(Calendar.MINUTE);
+		
+		System.out.printf("%d %d %d \n", lastDay, hour, minute);
+		
+		request.setAttribute("lastDay", lastDay);
+		
+		List<ManagerDto> mList = service.manager_CounselLists(id);
+		
+		return "manager_CounselLists";
 	}
 	
 	

@@ -2,6 +2,8 @@ package com.hrd.edu.comm;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.hrd.edu.dto.CounselDto2;
 
 public class CalendarUtil {
@@ -24,14 +26,14 @@ public class CalendarUtil {
 		}
 	}
 	
-	public static String getCalView(int i, List<CounselDto2> clist) {
+	public static String getCalViewTrainee(int i, List<CounselDto2> clist) {
 		String res = "";
 		String d = twoWord(i);
 		for(CounselDto2 dto : clist) {
 			if(dto.getMdate().substring(6,8).equals(d)) {//202105"17"1010=>17을 갖고옴 : 01
 				StringBuffer sb = new StringBuffer();
-				sb.append("<p title='"+dto.getDegr()+":"+dto.getId()+"'>"); //degr상담차수, id상담자아이디
-				sb.append("<a href=''></a>");
+			
+				sb.append("<a href=''><p title='"+dto.getDegr()+":"+dto.getId()+"'></a>"); //degr상담차수, id상담자아이디
 				//제목의 길이 표시 ...
 				if(dto.getId().length()>5) {
 					sb.append(dto.getId().substring(0,6));
@@ -45,4 +47,31 @@ public class CalendarUtil {
 		}
 		return res;
 	}
+	
+	public static String getCalViewManager(int i, List<CounselDto2> clist) {
+		String res = "";
+		String d = twoWord(i);
+		for(CounselDto2 dto : clist) {
+			if(dto.getMdate().substring(6,8).equals(d)) {//202105"17"1010=>17을 갖고옴 : 01
+				StringBuffer sb = new StringBuffer();
+			
+				sb.append("<a href=''><p title='"+dto.getDegr()+":"+dto.getId()+"'></a>"); //degr상담차수, id상담자아이디
+				//제목의 길이 표시 ...
+				if(dto.getId().length()>5) {
+					sb.append(dto.getId().substring(0,6));
+					sb.append("...");
+				}else {
+					sb.append(dto.getId());
+				}
+				sb.append("</p>");
+				res += sb.toString();
+			}
+		}
+		return res;
+	}
+	
+	
+	
+	
+	
 }
