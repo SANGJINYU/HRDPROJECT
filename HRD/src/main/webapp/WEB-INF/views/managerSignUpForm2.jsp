@@ -12,7 +12,7 @@
 <div>
 <div class="container" style="width: 400px;">
   <h2>회원가입</h2>
-  <form action="./masterInsert.do" method="post">
+  <form action="./managerInsert.do" method="post">
     <div class="form-group">
       <label for="id">아이디:</label>
       <input type="text" class="form-control" id="id" name="id">
@@ -34,11 +34,7 @@
       <label for="phone">전화번호:</label>
       <input type="text" class="form-control" id="phone" name="phone">
     </div>
-    <div class="form-group">
-      <label for="inst_ino" >기관번호:</label>
-      <input type="text" class="form-control" id="inst_ino" name="inst_ino">
-    </div>
-
+      <input type="hidden" class="form-control" id="inst_ino" name="inst_ino" value="${m_info.inst_ino}">
     <input type="button" class="btn btn-primary" value="회원가입" onclick="m_signUp()">
   </form>
 </div>
