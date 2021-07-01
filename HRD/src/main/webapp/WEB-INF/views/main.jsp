@@ -11,6 +11,7 @@
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div id="container'">
+
 	<form action="./search.do" method="get">
 	<div class='form-group'>
 			<div class="rdo">
@@ -18,13 +19,13 @@
 				<input type="radio" name="rdoBtn">기관명 검색
 			</div>
 			<div class="date">
-				시작일 : <input type="date" id="strdate">
+				시작일 : <input type="date" id="strdate" >
 				종료일 : <input type="date" id="enddate">
 			</div>
 		<div class="search">
 				<input class = "form-control"  type="text" name="search" id	="search">	
 				<input class = "btn btn-primary" type ="button" onclick = "searchInfo()" value ="검색">
-				<input class = "btn btn-info" type = "reset"  value ="초기화"> 
+				<input class = "btn btn-info" type = "reset"  value ="초기화" >
 		</div>
 	</div>
 	</form>

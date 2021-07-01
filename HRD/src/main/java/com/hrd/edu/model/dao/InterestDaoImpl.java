@@ -25,4 +25,11 @@ public class InterestDaoImpl implements IInterestDao {
 		
 	}
 
+	@Override
+	public boolean outcome(Map<String, Object> map) {
+		
+		int n =session.insert("com.hrd.edu.model.dao.InterestDaoImpl.", map);
+		return (n>0)?true:false;
+	}
+
 }

@@ -5,28 +5,23 @@ function signUp(){
 	var id = document.getElementById("id");
 	var pw = document.getElementById("pw");
 	var name = document.getElementById("name");
+	var email = document.getElementById("email");
+	var phone = document.getElementById("phone");
 	var addr = document.getElementById("addr");
-	var detailAddr = document.getElementById("detailAddr");
+	var detailAddr = document.getElementById("detail_addr");
 	
-	
-	if(id.value =="" || pw.value =="" || name.value=="" || addr.value=="" ||detailAddr.value==""){
+	if(id.value =="" || pw.value =="" || name.value==""|| email.value=="" || phone.value=="" || addr.value=="" || detailAddr.value==""){
 		alert("필수 정보를 모두 입력해주세요")
 		return false;
 	} else {
-		
 		frm.submit();
 	}
 }
 	
 function idChk(){
 	
-	var doc = document.getElementById("id").value;
 	
-	if(doc==""){
-		alert("아이디를 입력하고 중복확인을 진행하세요")
-	}
-	
-	
+	var id = document.getElementById("id");	
 	
 	$.ajax({
 		type:"post",
@@ -38,10 +33,10 @@ function idChk(){
 			if(msg=="true"){
 				
 			alert("중복된 아이디입니다.")	
-			$("#id").val("");
+			id.value="";
+	
 			}else{
-				
-			alert("사용가능한 아이디입니다. 사용하시겠습니까?")
+				alert("사용가능")
 			}
 		},
 		error:function(){
@@ -61,12 +56,6 @@ function inputPw(){
 	}else{
 		alert("사용가능한 비밀번호입니다.")
 	}
-}
-
-function signUp(){
-	
-	var frm = document.forms[0];
-	frm.submit();
 }
 
 //$(document).ready(function(){

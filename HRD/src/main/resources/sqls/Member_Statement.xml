@@ -37,7 +37,7 @@ SELECT PW
         WHERE ID=#{id} AND EMAIL=#{email} AND DELFLAG ='N'
 </select>
 
-<!-- (사용자) 내정보 보기 -->
+<!-- (사용자) 내정보 보기 -->	
 <select id="trainee_DetailInfo" parameterType="java.lang.String" resultType="trainee_Dto">
 SELECT ID,EMAIL ,PHONE ,NAME ,ADDR ,DETAIL_ADDR
         FROM TRAINEE t 

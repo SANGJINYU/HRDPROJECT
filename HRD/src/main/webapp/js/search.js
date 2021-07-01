@@ -26,10 +26,11 @@ function searchInfo(){
 	
 	var strdate = document.getElementById("strdate").value;
 	var enddate = document.getElementById("enddate").value;
+	
 	var tDate = new Date();
 	
  	var today = getFormatDate(tDate);
-
+	console.log(today);
 	document.getElementById("strdate").valueAsDate = new Date();
 
 	console.log(strdate);
@@ -86,8 +87,9 @@ function searchInfo(){
 		},
 		dataType: "json",
 		success: function(data){
+			$("#container").append("<h1 style='text-align: center;'>검색 결과</h1>")
 			htmlh = "<tr>"
-			htmlh += "<th>SEQ</th>"
+			htmlh += "<th>번호</th>"
 			htmlh += "	<th>주소</th>"
 			htmlh +=  "	<th>기관명</th>"
 			htmlh +=  "	<th>훈련일수</th>"
@@ -142,11 +144,11 @@ function searchInfo(){
 							html += "	<td>"+v.trDcnt+"</td>"
 							html += "	<td>"+v.trprDegr+"</td>"						
 							html += "	<td>"+v.trprNm+"</td>"
-							html += "	<td><input class = 'btn btn-warning' type ='button'  value ='관심' onclick='myInterest()'></td>"
-							html += "	<td><input class = 'btn btn-danger' type ='button'  value ='상세보기' onclick='courseDetail()'></td>"
+							html += "	<td><input class = 'btn btn-warning' type ='button'  value ='관심담기' onclick='myInterest()'></td>"
 							html += "</tr>"
 						$("#resulttable>tbody").append(html);
 						$(".form-group").attr('style','display:none');
+						
 					});
 				}
 			});
@@ -166,16 +168,10 @@ function searchInfo(){
 function myInterest(){
 	
 	alert("관심 과정 등록")
+//	location.href="./outcome.do?trpr_id="+v.trprId+"&trpr_degr="+v.trprDegr+"&json="+url;
 	
-	
-
-
 }
 
-function courseDetail(){
-	
-	alert("상세 보기")
-}
 
 function getFormatDate(date){
     var year = date.getFullYear();              //yyyy
@@ -183,6 +179,5 @@ function getFormatDate(date){
     month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
     var day = date.getDate();                   //d
     day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-
     return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
 }

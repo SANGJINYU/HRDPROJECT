@@ -49,7 +49,6 @@ public class MemberController {
 		TraineeDto dto = service.trainee_Login(map);
 
 			session.setAttribute("t_info", dto);
-
 			return "redirect:/traineeMain.do";
 	
 	}
@@ -123,15 +122,35 @@ public class MemberController {
 		}
 	}
 	
-	
 	@RequestMapping(value = "/traineeInfo.do", method = RequestMethod.GET)
 	public String detailInfo(HttpSession session) {
 		
-		logger.info("MemberController detailInfo");
-		
-		
-				
+
 		return "traineeInfo";
+		
 	}
 	
+	
+	@RequestMapping(value = "/modifyInfo.do", method = RequestMethod.POST)
+	public String modifyInfo(@RequestParam Map<String, Object>mMap) {
+		
+		
+		logger.info("MemberController modifyInfo-------- {}",mMap);
+		
+		Map<String,Object>map = new HashMap<String, Object>();
+		
+
+		map.put("id", mMap.get("id"));
+		map.put("phone", mMap.get("phone"));
+		map.put("addr", mMap.get("addr"));
+		map.put("detail_addr", mMap.get("detail_addr"));
+		
+		boolean isc = service.trainee_modifyInfo(map);
+		
+		if(isc) {
+			return "redirect:/logout.do";
+		}else {
+			return "redirect:/loginForm.do";
+		}
+	}
 }

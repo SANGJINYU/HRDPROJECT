@@ -10,5 +10,14 @@
 		
 	</insert>	
 
+
+<insert id="outcome" parameterType="java.util.Map">
+		
+	INSERT INTO OUTCOME
+		(SEQ, ID, TRPR_ID, TRPR_DEGR, JSON)
+			VALUES(OUTCOME_SEQ.NEXTVAL, #{trpr_id}, #{trpr_degr}, #{json});
+		
+	</insert>
+
 	
 </mapper>
