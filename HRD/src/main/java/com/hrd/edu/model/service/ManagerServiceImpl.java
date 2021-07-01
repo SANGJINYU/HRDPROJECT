@@ -38,7 +38,7 @@ public class ManagerServiceImpl implements IManagerService {
 
 	@Override
 	public boolean manager_IdChk(String id) {
-		log.info("ManagerServiceImpl manager_IdChk실행");
+		log.info("ManagerServiceImpl manager_IdChk실행 {}",id);
 		return mDao.manager_IdChk(id);
 	}
 

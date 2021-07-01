@@ -9,7 +9,7 @@
 <style type="text/css">
  #tb{
  	width: 700px;
- 	margin: 200px auto;
+ 	margin: 200px auto 50px;
  	text-align: center;
  }
  
@@ -17,11 +17,15 @@
  	border: 1px solid #808080;
  	text-align: center;
  }
+ .bt_area{
+ 	width: 700px;
+ 	text-align: center;
+ 	margin: auto;
+ }
 
 </style>
 </head>
 <body>
-${m_list}
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div id="container">
 <table id="tb">
@@ -44,16 +48,20 @@ ${m_list}
 		<td>${d.auth}</td>
 		<td> 
 			<c:if test="${d.auth != 'M'}">
-			<select>
-				<option selected="selected">수정</option>
-				<option value="Y">Y</option>
-				<option value="N">N</option>
-			</select>
+<!-- 			<select> -->
+<!-- 				<option selected="selected">수정</option> -->
+<!-- 				<option value="Y">Y</option> -->
+<!-- 				<option value="N">N</option> -->
+<!-- 			</select> -->
+				<button onclick="location.href='./modifyform.do?&id=${d.id}'">정보수정</button>
 			</c:if>
 		</td>
 	</tr>
 	</c:forEach>
 </table>
+<div class="bt_area">
+<button onclick="javascript:history.back(-1)">뒤로가기</button>
+</div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>

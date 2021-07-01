@@ -1,6 +1,8 @@
 package com.hrd.edu.ctrl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -35,8 +37,9 @@ public class ManagerController {
 	//마스터의 계정생성
 	@RequestMapping(value = "/masterInsert.do",method = RequestMethod.POST)
 	public String master_Insert(ManagerDto dto) {
-		log.info("마스터의 계정생성");
+		log.info("마스터의 계정생성 :{}",dto);
 		boolean isc=mService.master_Insert(dto);
+		
 		return isc?"loginForm":"javascript:alert('계정 생성 실패')";    //??
 	}
 	
@@ -68,10 +71,12 @@ public class ManagerController {
 	//	(관리자) 아이디 중복체크
 	@RequestMapping(value = "/managerIdChk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean manager_IdChk(@RequestParam String id) {
-		boolean isc=mService.manager_IdChk(id);
+	public Map<String, String> manager_IdChk(String id) {
+		Map<String, String> map = new HashMap<String, String>();
+		boolean isc = mService.manager_IdChk(id);
+		map.put("isc", String.valueOf(isc));
 		
-		return isc;
+		return map;
 	}
 	
 	//(담당자) 목록리스트로 이동
@@ -91,7 +96,22 @@ public class ManagerController {
 		return "managerList";
 	}
 	
+	//담당자 정보변경 페이지로 이동
+	@RequestMapping(value = "/modifyform.do",method = RequestMethod.GET)
+	public String manager_ModifyInfo(Model model, String id) {
+		ManagerDto dto=mService.manager_DetailInfo(id);
+		model.addAttribute("m",dto);
+		return "managerModifyInfo";
+	}
 	
+	
+	//담당자 정보변경
+	@RequestMapping(value = "/modifyManager.do", method = RequestMethod.POST)
+	public String manager_modifyInfo(@RequestParam Map<String,Object> map) {
+		boolean isc=mService.manager_ModifyInfo(map);
+	
+		return isc?"main":"managerModifyInfo";
+	}
 	
 	
 	
