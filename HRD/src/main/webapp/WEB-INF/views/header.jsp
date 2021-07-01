@@ -23,18 +23,18 @@
       <a class="navbar-brand" href="./traineeMain.do">HRD</a>
     </div>
     <ul class="nav navbar-nav">
-      <li ><a href="./traineeMain.do">Home</a></li>
-       <c:if test="${t_info != null && m_info == null}">
-      <li ><a  href="./interestList.do">나의 관심 </a></li>
+	      <li ><a href="./traineeMain.do">Home</a></li>
+	       <c:if test="${t_info != null && m_info == null}">
+	      <li ><a  href="./interestList.do">나의 관심 </a></li>
+	       <li><a href="./counselCalendar.do">게시판</a></li>
       </c:if>
-      <li><a href="./counselCalendar.do">게시판</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <c:if test="${t_info == null && m_info == null}">
       <li><a href="./signUp.do">
       <span class="glyphicon glyphicon-user"></span> 회원가입</a></li>
       <li><a href="./loginForm.do"><span class="glyphicon glyphicon-log-in"></span>로그인</a></li>      
-      </c:if>
+      </c:if>	
       <c:if test="${t_info != null && m_info == null}">
       <ul class="nav navbar-nav navbar-left">
       <li><a href="./traineeInfo.do"><span>${t_info.name}님 환영합니다</span></a></li>
