@@ -33,9 +33,9 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	public String counselCalendar(Map<String, Object> map,  HttpSession session, HttpServletRequest request, CounselDto2 cdto) {
 		log.info("CounselController counselCalendar 상담 예약 달력 게시판 메인페이지 {}",map);
 		
-		CounselDto2 dto = null;
-		cdto.getMdate();
-		
+//		CounselDto2 dto = null;
+//		cdto.getMdate();
+		map.put("yyyymm", "202107");
 		List<CounselDto2> cList = service.counsel_getCalViewList(map);
 		session.setAttribute("cList", cList);
 		
