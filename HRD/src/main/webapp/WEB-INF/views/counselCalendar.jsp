@@ -92,7 +92,7 @@ ${m_info.auth}
 						<td>
 							<!-- 사용자 -->
 							<c:if test="${m_info == null}">
-								<c:if test="${t_info.delflag eq 'N'}">
+								<c:if test="${t_info.delflag == 'N'}">
 									<a href="./counselBook.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
 										class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
 								</c:if>

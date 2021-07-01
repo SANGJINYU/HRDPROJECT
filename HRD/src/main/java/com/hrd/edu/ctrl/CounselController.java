@@ -68,7 +68,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value="/counselBook.do", method=RequestMethod.GET)
 	public String counselBook(HttpServletRequest request) {
 		log.info("CounselController counselBook (사용자) 상담 예약 글 작성하기");
-		int year = Integer.parseInt(request.getParameter("year").trim()); //공백들어가면 오류나니까 꼭 trim()
+		int year = Integer.parseInt(request.getParameter("year").trim());
 		int month = Integer.parseInt(request.getParameter("month"));
 		int date = Integer.parseInt(request.getParameter("date"));
 		
@@ -76,13 +76,11 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		gcal.set(year,month-1,date);
 		
 		int lastDay = gcal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		int hour = gcal.get(Calendar.HOUR_OF_DAY);
-		int minute = gcal.get(Calendar.MINUTE);
 		
-		System.out.printf("%d %d %d \n", lastDay, hour, minute);
+		System.out.printf("%d \n", lastDay);
 		
 		request.setAttribute("lastDay", lastDay);
-		
+
 		
 		return "counselBookForm";
 	}
@@ -90,7 +88,8 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value="/counselBookForm.do", method=RequestMethod.POST)
 	public String counselBookForm(CounselDto2 dto, HttpSession session, Model model) {
 		log.info("CounselController counselBookForm (사용자) 상담 예약 글 작성 완료");
-		CounselDto2 cDto2 = (CounselDto2)session.getAttribute("dto");
+		CounselDto2 cDto2 = (CounselDto2)session.getAttribute("cList");
+		System.out.println("==========================================="+cDto2);
 		dto.setId(cDto2.getId());
 		boolean isc = service.trainee_CounselBook(cDto2);
 		if(isc) {
@@ -107,7 +106,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		map.put("id", id);
 		map.put("seq", seq);
 		CounselDto2 cDto2 = service.trainee_CounselDetail(map);
-		model.addAttribute(cDto2);
+		model.addAttribute("cDto2",cDto2);
 		return "counselDetail";
 	}
 		

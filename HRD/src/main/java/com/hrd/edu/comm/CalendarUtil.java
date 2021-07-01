@@ -29,11 +29,10 @@ public class CalendarUtil {
 		String res = "";
 		String d = twoWord(i);
 		for(CounselDto2 dto : clist) {
-			if(dto.getMdate().substring(6,8).equals(d)) {//202105"17"1010=>17을 갖고옴 : 01
+			if(dto.getMdate().substring(6,8).equals(d)) {
 				StringBuffer sb = new StringBuffer();
 			
-				sb.append("<a href='./counselDetail.do'><p title='"+dto.getDegr()+":"+dto.getId()+"'>"); //degr상담차수, id상담자아이디
-				//제목의 길이 표시 ...
+				sb.append("<a href='./counselDetail.do?seq="+dto.getSeq()+"&id="+dto.getId()+"'><p title='"+dto.getDegr()+":"+dto.getId()+"'>"); //degr상담차수, id상담자아이디
 				if(dto.getId().length()>5) {
 					sb.append(dto.getId().substring(0,6));
 					sb.append("...");
@@ -53,11 +52,9 @@ public class CalendarUtil {
 		
 		for(CounselDto2 dto : clist) {
 //			if(dto.getM_id()==m_info.getId()) {
-			if(dto.getMdate().substring(6,8).equals(d)) {//202105"17"1010=>17을 갖고옴 : 01
+			if(dto.getMdate().substring(6,8).equals(d)) {
 				StringBuffer sb = new StringBuffer();
 //				System.out.println("================="+m_info.getId());
-				
-					
 					sb.append("<a href='./manager_CounselDetail.do?seq="+dto.getSeq()+"'><p title='"+dto.getDegr()+":"+dto.getId()+"'>"); //degr상담차수, id상담자아이디
 					
 					if(dto.getId().length()>5) {
