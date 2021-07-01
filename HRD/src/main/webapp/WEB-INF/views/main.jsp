@@ -5,41 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>메인</title>
+<link rel="stylesheet" type="text/css" href="./css/main.css">
 <script type="text/javascript" src="./js/search.js"></script>
-<style type="text/css">
-
-.search,.rdo,.date{
-
-width: 400px;	
- margin: 0px auto;
-
-}
-
-.btn{
-
-	margin: 0 auto;
-	
-}
-
-table{
-
-margin: 0px auto;
-
-}
-
-a{
-
-	text-decoration: none;
-
-}
-
-#info{
-
-width: 1200px;
-
-}
-
-</style>
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
@@ -51,8 +18,8 @@ width: 1200px;
 				<input type="radio" name="rdoBtn">기관명 검색
 			</div>
 			<div class="date">
-			 시작일 <input type="date"  id="strdate" >			
-			 종료일 <input type="date" id="enddate">				
+				시작일 : <input type="date" id="strdate">
+				종료일 : <input type="date" id="enddate">
 			</div>
 		<div class="search">
 				<input class = "form-control"  type="text" name="search" id	="search">	
@@ -63,20 +30,12 @@ width: 1200px;
 	</form>
 	<div id="info">
 	<table id="resulttable"	style="display: none">
-			<thead>
-		<tr>
-			<th>주소</th><th>기관명</th>
-			<th>훈련일수</th> 
-			<th>당당자 </th><th>담당자 이메일</th>
-			<th>담당자 전화번호</th><th>과정회차</th>
-			<th>과정명</th>
-		</tr>
+	<thead>
 	</thead>
-		<tbody>
-		</tbody>
+	<tbody>
+	</tbody>
 	</table>
-	<div id="detailResult"></div>
-	</div>
+</div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>

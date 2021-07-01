@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+
+
+
+.search,.rdo,.date{
+
+width: 400px;	
+ margin: 0px auto;
+
+}
+
+.btn{
+
+	margin: 0 auto;
+	
+}
+
+table{
+
+text-align:center;
+margin: 0px auto;
+width: 100%;
+
+}
+
+td{
+	
+	height: 100px;
+}
+
+th{
+	
+	text-align: center;
+	width: 150px;
+	height: 20px;
+	
+}
+
+a{
+
+	text-decoration: none;
+
+}
+
+#info{
+
+width: auto;
+text-align: center;
+}

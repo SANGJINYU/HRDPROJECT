@@ -10,8 +10,7 @@ public interface ITraineeService {
 	public boolean trainee_Insert(TraineeDto dto);
 	
 	//사용자 로그인
-	public TraineeDto trainee_Login(TraineeDto dto);
-	
+	public TraineeDto trainee_Login(Map<String,Object> map);
 	
 	//사용자 아이디 중복체크
 	public boolean trainee_IdChk(String id);

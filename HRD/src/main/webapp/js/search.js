@@ -23,13 +23,25 @@ function searchInfo(){
 	
 
 	var url = "http://www.hrd.go.kr/jsp/HRDP/HRDPO00/HRDPOA60/HRDPOA60_1.jsp?returnType=XML&authKey=zTTgDhnacOrKYEU7PyiCIPquwdPOJFDO&pageNum=1&pageSize=100&";
+	
 	var strdate = document.getElementById("strdate").value;
 	var enddate = document.getElementById("enddate").value;
+	var tDate = new Date();
+	
+ 	var today = getFormatDate(tDate);
+
+	document.getElementById("strdate").valueAsDate = new Date();
+
+	console.log(strdate);
+	console.log(enddate);
+	console.log(today);
+
+	
+	strdate.value = today;
 	
 	var cstrDate = strdate.replace(/-/g,'')
 	var cendDate = enddate.replace(/-/g,'')
 	
-
 	var trpr = document.getElementsByName("rdoBtn")[0];
 	var inst = document.getElementsByName("rdoBtn")[1];
 
@@ -37,7 +49,7 @@ function searchInfo(){
 	url += "srchTraStDt="+cstrDate+"&" //모집 시작 시작일
 	url += "srchTraEndDt="+cendDate+"&" // 모집 종료 ?
 	url += "outType=1&"// 반환 1 리스트 2 상세
-	url += "sort=ASC&" // 오름차순 
+	url += "sort=DESC&" // 오름차순 
 //	url += "srchTraProcessNm="+keyword+"&"
 //	url += "sortCol=srchTraOrganNm&"
 	//추후작성
@@ -63,6 +75,9 @@ function searchInfo(){
 //    }
 //	console.log(srchTraArea1+","+srcthTraArea2 +","+ srchKeco1+","+date);
 
+
+
+
 	$.ajax({
 		type: "get",
 		url: "./search.do",
@@ -71,11 +86,21 @@ function searchInfo(){
 		},
 		dataType: "json",
 		success: function(data){
+			htmlh = "<tr>"
+			htmlh += "<th>SEQ</th>"
+			htmlh += "	<th>주소</th>"
+			htmlh +=  "	<th>기관명</th>"
+			htmlh +=  "	<th>훈련일수</th>"
+			htmlh +=  "	<th>과정회차</th>"
+			htmlh +=  "	<th>과정명</th>"
+			htmlh += "</tr>"
+			$("#resulttable>thead").append(htmlh);
 			$.each(data, function(key, value){
-				var html = "";
+				html ="";
 				if(key == "info"){
 					var list = value;
 					$.each(list, function(k, v){
+						console.log(k);
 //					  console.log(list.length);
 //			
 //					$("#resulttable>tbody").html("<tr></tr>");
@@ -110,86 +135,18 @@ function searchInfo(){
 
 
 							$("#resulttable").attr('style', "display:inline;");
-							html = "<tr>"
+							html = "	<tr>"
+							html += "	<td>"+k+"</td>"
 							html += "	<td>"+v.address+"</td>"
-//							html += "	<td>"+v.addr1+"</td>"
-//							html += "	<td><a href= '"+v.hpAddr+"'>"+v.hpAddr+"</a></td>" //innerHTML로 
-//							html += "	<td>"+v.instIno+"</td>"
 							html += "	<td>"+v.subTitle+"</td>"
 							html += "	<td>"+v.trDcnt+"</td>"
-							html += "	<td>"+v.trprChap+"</td>"
-							html += "	<td>"+v.trprChapEmail+"</td>"
-							html += "	<td>"+v.trprChapTel+"</td>"
-//							html += "	<td>"+v.trprId+"</td>"
 							html += "	<td>"+v.trprDegr+"</td>"						
-//							html += " 	<input value='"+v.trprDegr+"' name='v.trprDegr' type='hidden'>"
-//							html += "	<td><a href='./detail.do?url="+url+"'>"+v.trprNm+"</a></td>"
-							html += "	<td><a onclick='courseDetail()'>"+v.trprNm+"</a></td>"
-//							html += "	<td>"+v.trtm+"</td>"
-//							html += "	<td>"+v.traStartDate+"</td>"
-//							html += "	<td>"+v.traEndDate+"</td>"
-//							html += "	<td>"+v.yardMan+"</td>"
-							html += "	<td><input class = 'btn btn-primary' type ='button'  value ='관심' onclick='myInterest()'></td>"
-							html += "	<td><input class = 'btn btn-primary' type ='button'  value ='상세보기' onclick='courseDetail()'></td>"
-							html += "</tr>"
-							
-						$("#resulttable>tbody").append(html);
-					});
-				}
-			});
-		},
-		error:function(){
-			alert("잘못된 요청")
-		}
-	})
-	
-	
-	
-	alert("종료!");
-	return false;
-}
-
-function courseDetail(){
-	$.ajax({
-		type: "get",
-		url: "./search.do",
-		data:{
-			"url" : url
-		},
-		dataType: "json",
-		success: function(data){
-			$.each(data, function(key, value){
-				var html = "";
-				if(key == "info"){
-					var list = value;
-					$.each(list, function(k, v){
-
-//append
-//tbody 만들어서 tr 만들고 append  tbody에 붙이고 전체를 table에 붙여 넣음
-
-							$("#resulttable").attr('style', "display:inline;");
-							html = "<tr>"
-							html += "	<td>"+v.address+"</td>"
-//							html += "	<td>"+v.addr1+"</td>"
-//							html += "	<td><a href= '"+v.hpAddr+"'>"+v.hpAddr+"</a></td>" //innerHTML로 
-//							html += "	<td>"+v.instIno+"</td>"
-							html += "	<td>"+v.subTitle+"</td>"
-							html += "	<td>"+v.trDcnt+"</td>"
-							html += "	<td>"+v.trprChap+"</td>"
-							html += "	<td>"+v.trprChapEmail+"</td>"
-							html += "	<td>"+v.trprChapTel+"</td>"
-//							html += "	<td>"+v.trprId+"</td>"
-							html += "	<td>"+v.trprDegr+"</td>"						
-//							html += "	<td><a href='./detail.do?url="+url+"'>"+v.trprNm+"</a></td>"
 							html += "	<td>"+v.trprNm+"</td>"
-							html += "	<td>"+v.trtm+"</td>"
-							html += "	<td>"+v.traStartDate+"</td>"
-							html += "	<td>"+v.traEndDate+"</td>"
-							html += "	<td>"+v.yardMan+"</td>"
-							html += "	<td><input class = 'btn btn-primary' type ='button'  value ='관심' onclick='myInterest()'></td>"
+							html += "	<td><input class = 'btn btn-warning' type ='button'  value ='관심' onclick='myInterest()'></td>"
+							html += "	<td><input class = 'btn btn-danger' type ='button'  value ='상세보기' onclick='courseDetail()'></td>"
 							html += "</tr>"
-							
-						$("#detailResult").append(html);
+						$("#resulttable>tbody").append(html);
+						$(".form-group").attr('style','display:none');
 					});
 				}
 			});
@@ -204,23 +161,28 @@ function courseDetail(){
 	alert("종료!");
 	return false;
 }
-
-
 
 
 function myInterest(){
 	
 	alert("관심 과정 등록")
+	
+	
 
 
 }
 
-//function getFormatDate(date){
-//    var year = date.getFullYear();              //yyyy
-//    var month = (1 + d	ate.getMonth());          //M
-//    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
-//    var day = date.getDate();                   //d
-//    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
-//
-//    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
-//}
+function courseDetail(){
+	
+	alert("상세 보기")
+}
+
+function getFormatDate(date){
+    var year = date.getFullYear();              //yyyy
+    var month = (1 + date.getMonth());          //M
+    month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+    var day = date.getDate();                   //d
+    day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+
+    return  year + '' + month + '' + day;       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+}

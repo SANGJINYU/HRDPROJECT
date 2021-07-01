@@ -20,11 +20,6 @@ public class TraineeServiceImpl implements ITraineeService {
 	}
 
 	@Override
-	public TraineeDto trainee_Login(TraineeDto dto) {
-		return dao.trainee_Login(dto);
-	}
-
-	@Override
 	public boolean trainee_IdChk(String id) {
 		int n = dao.trainee_IdChk(id);
 		return (n>0)?true:false;
@@ -53,6 +48,11 @@ public class TraineeServiceImpl implements ITraineeService {
 	@Override
 	public boolean trainee_DelUser(String id) {
 		return dao.trainee_DelUser(id);
+	}
+
+	@Override
+	public TraineeDto trainee_Login(Map<String, Object> map) {
+		return dao.trainee_Login(map);
 	}
 
 }
