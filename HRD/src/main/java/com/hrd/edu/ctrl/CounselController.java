@@ -18,10 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrd.edu.comm.CalendarUtil;
-import com.hrd.edu.dto.CounselDto;
 import com.hrd.edu.dto.CounselDto2;
 import com.hrd.edu.dto.ManagerDto;
-import com.hrd.edu.dto.TraineeDto;
 import com.hrd.edu.model.service.ICounselService;
 
 @Controller
@@ -105,7 +103,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/counselDetail.do", method=RequestMethod.GET)
 	public String counselDetail(Map<String, Object> map, Model model, String id, String seq) {
-		log.info("CounselController counselDetail (사용자) 상담 예약 글 상세페이지");
+		log.info("CounselController counselDetail (사용자) 상담 예약 글 상세페이지 {}", map);
 		map.put("id", id);
 		map.put("seq", seq);
 		CounselDto2 cDto2 = service.trainee_CounselDetail(map);
@@ -120,26 +118,22 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		String id = m_info.getId();
 		System.out.println(id);
 		
-		int year = Integer.parseInt(request.getParameter("year").trim()); //공백들어가면 오류나니까 꼭 trim()
-		int month = Integer.parseInt(request.getParameter("month"));
-		int date = Integer.parseInt(request.getParameter("date"));
-		
-		GregorianCalendar gcal = new GregorianCalendar();
-		gcal.set(year,month-1,date);
-		
-		int lastDay = gcal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		int hour = gcal.get(Calendar.HOUR_OF_DAY);
-		int minute = gcal.get(Calendar.MINUTE);
-		
-		System.out.printf("%d %d %d \n", lastDay, hour, minute);
-		
-		request.setAttribute("lastDay", lastDay);
-		
 		List<ManagerDto> mList = service.manager_CounselLists(id);
 		
 		return "manager_CounselLists";
 	}
 	
+	@RequestMapping(value="/manager_CounselDetail.do", method=RequestMethod.GET)
+	public String manager_CounselDetail(@RequestParam Map<String, Object> map, HttpSession session) {
+		log.info("CounselController manager_CounselDetail (담당자) 상담 예약 글 상세 조회 {}",map);
+		ManagerDto dto=(ManagerDto)session.getAttribute("m_info");
+		
+		map.put("id",dto.getM_id());
+		
+		ManagerDto mdto = service.manager_CounselDetail(map);
+		session.setAttribute("mdto", mdto);
+		return "counselDetail";
+	}
 	
 	
 	

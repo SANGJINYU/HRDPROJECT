@@ -1,3 +1,4 @@
+<%@page import="com.hrd.edu.dto.ManagerDto"%>
 <%@page import="com.hrd.edu.model.service.CounselServiceImpl"%>
 <%@page import="com.hrd.edu.model.service.ICounselService"%>
 <%@page import="java.util.HashMap"%>
@@ -49,11 +50,11 @@
 	int beforelastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	
 	List<CounselDto2> cList = (List<CounselDto2>)session.getAttribute("cList");
-
+	ManagerDto minfo=(ManagerDto)session.getAttribute("m_info");
 
 %>
 <div id="container">
-<h2> 상담 일정 예약 게시판 </h2>
+<h2 style="text-align: center;"> 상담 일정 예약 게시판 </h2>
 ${t_info}<br>
 ${m_info}<br>
 ${cList}<br>
@@ -115,22 +116,24 @@ ${m_info.auth}
 						
 						<!-- 해당 일의 게시글 3개를 출력 -->
 						<div class = "clist">
-<%-- 						<%CounselDto2 cdto = (CounselDto2)session.getAttribute("cList"); %> --%>
 							
 							<!-- 사용자 -->
 							<c:if test="${m_info == null}">
-								<c:if test="${t_info.delflag eq 'N'}">
-									<%=CalendarUtil.getCalViewTrainee(i,cList) %>
+							<c:forEach var="cList" items="${cList}">
+								<c:if test="${t_info.id eq cList.id}">
+									<%=CalendarUtil.getCalViewTrainee(i,cList)  %>
 								</c:if>
+							</c:forEach>
 							</c:if>
 							
 							<!-- 담당자 -->
 							<c:if test="${t_info == null}">
-								<c:if test="${m_info.auth != 'N'}">
-									<%=CalendarUtil.getCalViewManager(i,cList) %>
+							<c:forEach var="cList" items="${cList}">
+								<c:if test="${m_info.id == cList.m_id}">
+									<%=CalendarUtil.getCalViewManager(i,cList)%>
 								</c:if>
+							</c:forEach>
 							</c:if>
-							
 							
 <%-- 							${cList} --%>
 							
@@ -156,6 +159,6 @@ ${m_info.auth}
 
 </div>
 
-
+<%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
