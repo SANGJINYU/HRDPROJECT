@@ -19,34 +19,36 @@
 		<tbody>
 			<tr>
 				<th>글번호</th>
-				<td>${mdto.seq}</td>
-			</tr>
-			<tr>
-				<th>기관아이디</th>
-<%-- 				<td> ${TRPR_ID} </td> --%>
-				<td><input type="text" name="trprId" value="${mdto.trpr_id}" class="form-control" readonly> </td>
+				<td>${cDto2.seq}</td>
 			</tr>
 			<tr>
 				<th>과정명</th>
-<%-- 				<td>${TRPR_NM}</td> --%>
-				<td><input type="text" name="trprNm" value="${mdto.trpr_nm}" class="form-control" readonly> </td>
+				<td><input type="text" name="trprNm" value="${cDto2.trpr_nm}" class="form-control" readonly> </td>
 			</tr>
 			<tr>
 				<th>과정차수</th>
-<%-- 				<td>${TRPR_DEGR}</td> --%>
-				<td><input type="text" name="trprDegr" value="${mdto.trpr_degr}" class="form-control" readonly> </td>
+				<td><input type="text" name="trprDegr" value="${cDto2.trpr_degr}" class="form-control" readonly> </td>
 			<tr>
-				<th>아이디</th>
-				<td>${mdto.id}</td>
+			<tr>
+				<th>기관명</th>
+				<td><input type="text" name="trprId" value="${cDto2.trpr_id}" class="form-control" readonly> </td>
 			</tr>
 			<tr>
-				<th>일정</th>
-				<td>${mdto.mdate}</td>
+				<th>아이디</th>
+				<td>${cDto2.id}</td>
+			</tr>
+			<tr>
+				<th>담당자 아이디</th>
+				<td>${cDto2.m_id}</td>
+			</tr>
+			<tr>
+				<th>상담일정</th>
+				<td>${cDto2.mdate}</td>
 			</tr>
 			<tr>
 				<th>내용</th>
 				<td>
-					<textarea class="form-control" rows="10" cols="50" name="content">${mdto.content}</textarea>
+					<textarea class="form-control" rows="10" cols="50" name="content">${cDto2.content}</textarea>
 				</td>
 			</tr>
 			
@@ -55,8 +57,8 @@
 			<tr>
 				<td colspan="2">
 					<input class="btn btn-warning" type="button" value="돌아가기" onclick="history.back(-1)">
-					<input type="button" class="btn btn-success btn-left" value="수정">
-					<input type="button" class="btn btn-danger" value="삭제">
+					<input type="button" class="btn btn-success btn-left" value="수정" onclick="">
+					<input type="button" class="btn btn-danger" value="삭제" onclick="">
 				</td>
 			</tr>
 		</tfoot>
