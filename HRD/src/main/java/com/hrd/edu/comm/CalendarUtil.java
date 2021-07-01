@@ -30,7 +30,8 @@ public class CalendarUtil {
 		for(CounselDto2 dto : clist) {
 			if(dto.getMdate().substring(6,8).equals(d)) {//202105"17"1010=>17을 갖고옴 : 01
 				StringBuffer sb = new StringBuffer();
-				sb.append("<p title='["+dto.getDegr()+"]"+dto.getId()+"'>"); //degr상담차수, id상담자아이디
+				sb.append("<p title='"+dto.getDegr()+":"+dto.getId()+"'>"); //degr상담차수, id상담자아이디
+				sb.append("<a href=''></a>");
 				//제목의 길이 표시 ...
 				if(dto.getId().length()>5) {
 					sb.append(dto.getId().substring(0,6));

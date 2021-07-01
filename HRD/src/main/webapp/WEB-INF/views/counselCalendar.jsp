@@ -10,6 +10,7 @@
 <%@page import="com.hrd.edu.model.dao.ICounselDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,9 +105,19 @@ ${cList}
 				for(int i=1;i<=lastDay;i++){
 					%>
 						<td>
-						<a href="./counselBook.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
-							class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+							<!-- 사용자 -->
+							<c:if test="${t_info.delflag eq 'N'}">
+								<a href="./counselBook.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
+									class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+							</c:if>
+							<!-- 담당자 -->
+							<c:if test="${m_info.auth eq 'Y' or 'M'}">
+								<a href="./manager_CounselLists.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
+									class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+							</c:if>
 						
+						<a href="./counselCalendar.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
+							class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
 						<!-- 글쓰기 버튼 -->
 <%-- 						<a href="./CalController.do?command=insertForm&year=<%=year%>&month=<%=month%>&date=<%=i%>"> --%>
 <!-- 							<img alt="글작성" src="./img/pen.png"> -->
