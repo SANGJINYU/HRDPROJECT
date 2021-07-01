@@ -50,7 +50,7 @@ public class ManagerController {
 	}
 	
 	//담당자 로그인
-	@RequestMapping(value = "/managerLogin",method = RequestMethod.POST)
+	@RequestMapping(value = "/managerLogin.do",method = RequestMethod.POST)
 	public String manager_Login(ManagerDto dto,HttpSession session) {
 		log.info("담당자 로그인{}",dto);
 		ManagerDto mDto=  mService.manager_Login(dto);
@@ -61,7 +61,7 @@ public class ManagerController {
 			
 		} else {
 			log.info("담당자 로그인 실패");
-			return null;
+			return "loginForm";
 		}
 	}
 	

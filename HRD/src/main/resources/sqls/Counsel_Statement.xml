@@ -4,14 +4,14 @@
 
 <!-- 공통 달별 일별 리스트 -->
 <select id="counsel_getCalViewList" parameterType="java.util.Map" resultType="counsel_Dto">
-	SELECT SEQ, ID, CONTENT, MDATE, REGDATE, FLAG 
+	SELECT SEQ, M_ID, ID, CONTENT, DEGR, TRPR_ID, TRPR_DEGR, TRPR_NM, REGDATE, FLAG, MDATE 
 	FROM (
 		SELECT ROW_NUMBER() OVER(PARTITION BY SUBSTR(MDATE,1,8) ORDER BY MDATE) rn
-			, SEQ, ID, CONTENT, MDATE, REGDATE, FLAG 
+			, SEQ, M_ID, ID, CONTENT, DEGR, TRPR_ID, TRPR_DEGR, TRPR_NM, REGDATE, FLAG, MDATE
 			FROM COUNSEL c 
-			WHERE SUBSTR(MDATE,1,6) = #{yyyymm} AND FLAG ='B' OR FLAG ='C'
+			WHERE SUBSTR(MDATE,1,6) = #{yyyymm} AND (FLAG ='B' OR FLAG ='C')
 	)
-	WHERE rn BETWEEN 1 AND 4
+	WHERE rn BETWEEN 1 AND 2
 </select>
 
 <!-- 공통 일정개수 -->

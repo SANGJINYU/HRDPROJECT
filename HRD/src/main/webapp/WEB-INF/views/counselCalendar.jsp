@@ -25,19 +25,6 @@
 	int year = cal.get(Calendar.YEAR);
 	int month = cal.get(Calendar.MONTH)+1;
 	
-	////파라미터를 전송받았어 새로운 년도 월이 필요함. 그럼 파라미터가 있는지 없는지 판단해주고 파라미터가 있다면 년월을 바꿔줌
-	//전송된 파라미터 값 중에서 param year와 param month가 있다면 판단하여 값을 재입력해준다
-	String paramYear = request.getParameter("year");
-	String paramMonth = request.getParameter("month");
-	
-	//요청을 판단하여 재입력
-	if(paramYear != null){
-		year = Integer.parseInt(paramYear);
-	}
-	if(paramMonth != null){
-		month = Integer.parseInt(paramMonth);
-	}
-	
 	//화면에 출력되는 값을 음수처리를 해줘야함 ex) 2021.-1
 	//값을 연산하지 않고 Calendar객체를 세팅하고 getYear와 getMonth를 해줘도 됨
 	if(month > 12){
@@ -57,23 +44,20 @@
 	//요청 년도 월의 최대 일수
 	int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	
-	////앞뒤찍는거...ㅎㅇㅌ
 	//이전달력계산을 위한 세팅
 	cal.set(year,month-1-1, 1);
 	int beforelastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 	
-	String yyyymm=year+CalendarUtil.twoWord(month);
-	System.out.printf("%s. %s, %s \n", year, month, yyyymm);
-	
-	
-	List<CounselDto2> lists = (List<CounselDto2>)session.getAttribute("cList");
+	List<CounselDto2> cList = (List<CounselDto2>)session.getAttribute("cList");
 
 
 %>
 <div id="container">
 <h2> 상담 일정 예약 게시판 </h2>
-${t_info}
-${cList}
+${t_info}<br>
+${m_info}<br>
+${cList}<br>
+${m_info.auth}
 	<table id="calendar">
 		<caption style="text-align: center;font-size:17pt;">
 				<a href="./counselCalendar.do?year=<%=year-1%>&month=<%=month%>">◁</a>
@@ -106,18 +90,23 @@ ${cList}
 					%>
 						<td>
 							<!-- 사용자 -->
-							<c:if test="${t_info.delflag eq 'N'}">
-								<a href="./counselBook.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
-									class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+							<c:if test="${m_info == null}">
+								<c:if test="${t_info.delflag eq 'N'}">
+									<a href="./counselBook.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
+										class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+								</c:if>
 							</c:if>
+							
 							<!-- 담당자 -->
-							<c:if test="${m_info.auth eq 'Y' or 'M'}">
-								<a href="./manager_CounselLists.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
-									class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+							<c:if test="${t_info == null}">
+								<c:if test="${m_info.auth != 'N'}">
+									<a href="./manager_CounselLists.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
+										class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+								</c:if>
 							</c:if>
 						
-						<a href="./counselCalendar.do?year=<%=year%>&month=<%=month%>&date=<%=i%>"
-							class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a>
+<%-- 						<a href="./counselCalendar.do?year=<%=year%>&month=<%=month%>&date=<%=i%>" --%>
+<%-- 							class="countView" style="color:<%=CalendarUtil.fontColor(i, dayOfWeek)%>"><%=i %></a> --%>
 						<!-- 글쓰기 버튼 -->
 <%-- 						<a href="./CalController.do?command=insertForm&year=<%=year%>&month=<%=month%>&date=<%=i%>"> --%>
 <!-- 							<img alt="글작성" src="./img/pen.png"> -->
@@ -127,7 +116,22 @@ ${cList}
 						<!-- 해당 일의 게시글 3개를 출력 -->
 						<div class = "clist">
 <%-- 						<%CounselDto2 cdto = (CounselDto2)session.getAttribute("cList"); %> --%>
-							<%=CalendarUtil.getCalView(i,lists) %>
+							
+							<!-- 사용자 -->
+							<c:if test="${m_info == null}">
+								<c:if test="${t_info.delflag eq 'N'}">
+									<%=CalendarUtil.getCalViewTrainee(i,cList) %>
+								</c:if>
+							</c:if>
+							
+							<!-- 담당자 -->
+							<c:if test="${t_info == null}">
+								<c:if test="${m_info.auth != 'N'}">
+									<%=CalendarUtil.getCalViewManager(i,cList) %>
+								</c:if>
+							</c:if>
+							
+							
 <%-- 							${cList} --%>
 							
 						</div>
