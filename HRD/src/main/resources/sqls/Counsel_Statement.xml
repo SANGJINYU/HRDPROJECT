@@ -11,7 +11,7 @@
 			FROM COUNSEL c 
 			WHERE SUBSTR(MDATE,1,6) = #{yyyymm} AND FLAG ='B' OR FLAG ='C'
 	)
-	WHERE rn BETWEEN 1 AND 2
+	WHERE rn BETWEEN 1 AND 4
 </select>
 
 <!-- 공통 일정개수 -->
@@ -103,7 +103,7 @@ SELECT c.SEQ ,c.ID ,CONTENT , DEGR ,TRPR_ID ,TRPR_NM ,REGDATE ,FLAG ,MDATE ,m.NA
 
 <!-- 마이페이지 -->
 <!-- (담당자) 상담 예약 목록 조회 -->
-<select id="Manager_CounselLists" parameterType="java.lang.String" resultMap="managerJoinDto">
+<select id="manager_CounselLists" parameterType="java.lang.String" resultMap="managerJoinDto">
 SELECT  c.SEQ , c.TRPR_NM ,REGDATE, MDATE
         FROM COUNSEL c ,MANAGER m 
         WHERE c.M_ID = m.ID
@@ -112,7 +112,7 @@ SELECT  c.SEQ , c.TRPR_NM ,REGDATE, MDATE
 </select>
 
 <!-- (담당자) 상담 예약 상세 조회 -->
-<select id="Manager_CounselDetail" parameterType="java.util.Map" resultMap="managerJoinDto" >
+<select id="manager_CounselDetail" parameterType="java.util.Map" resultMap="managerJoinDto" >
 SELECT  c.SEQ, c.ID , TRPR_NM ,TRPR_DEGR ,DEGR , FLAG, REGDATE ,MDATE 
         FROM COUNSEL c JOIN MANAGER m 
         ON c.M_ID = m.ID 
@@ -120,13 +120,13 @@ SELECT  c.SEQ, c.ID , TRPR_NM ,TRPR_DEGR ,DEGR , FLAG, REGDATE ,MDATE
 </select>
 
 <!-- (담당자) 상담 예약 상태 변경 -->
-<update id="Manager_CounselUpdate" parameterType="java.lang.String">
+<update id="manager_CounselUpdate" parameterType="java.lang.String">
 	UPDATE COUNSEL SET FLAG=#{flag}
         WHERE SEQ=#{seq}
 </update>
 
 <!-- (마스터) 예약신청 배분 -->
-<update id="Manager_CounselShare" parameterType="java.lang.String">
+<update id="manager_CounselShare" parameterType="java.lang.String">
 UPDATE COUNSEL SET M_ID =#{m_id} WHERE SEQ =#{seq}
 </update>
 

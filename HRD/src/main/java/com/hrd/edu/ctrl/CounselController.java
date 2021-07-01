@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hrd.edu.comm.CalendarUtil;
 import com.hrd.edu.dto.CounselDto;
@@ -30,13 +31,31 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	private ICounselService service;
 	
 	@RequestMapping(value="/counselCalendar.do", method=RequestMethod.GET)
-	public String counselCalendar(Map<String, Object> map,  HttpSession session, HttpServletRequest request, CounselDto2 cdto) {
+	public String counselCalendar(@RequestParam Map<String, Object> map,  HttpSession session) {
 		log.info("CounselController counselCalendar 상담 예약 달력 게시판 메인페이지 {}",map);
 		
-		CounselDto2 dto = null;
-		cdto.getMdate();
+//		System.out.println(cdto.getcListMdate());
+//		
+//		dto.setMdate(cdto.getMdate());
+//		String yyyymm = dto.getMdate();
+//		System.out.println(yyyymm);
+		System.out.println(map);
+		
+		
+//		map.put("yyyymm", year+date);
+		
+		
+		String year = (String)map.get("year");
+		String month = (String)map.get("month");
+//		String date = (String)map.get("date");
+		
+		String yyyymm = year+month;
+		String y = (String)map.get("year");
+		String mm = CalendarUtil.twoWord(Integer.parseInt(yyyymm));
+		map.put("yyyymm", yyyymm);
 		
 		List<CounselDto2> cList = service.counsel_getCalViewList(map);
+		System.out.println(cList);
 		session.setAttribute("cList", cList);
 		
 		return "counselCalendar";
@@ -65,6 +84,7 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		
 		return "counselBookForm";
 	}
+	
 	@RequestMapping(value="/counselBookForm.do", method=RequestMethod.POST)
 	public String counselBookForm(CounselDto2 dto, HttpSession session, Model model) {
 		log.info("CounselController counselBookForm (사용자) 상담 예약 글 작성 완료");
@@ -88,9 +108,13 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 		model.addAttribute(cDto2);
 		return "counselDetail";
 	}
-	
-	
-	
+		
+	@RequestMapping(value="/manager_CounselLists.do", method=RequestMethod.GET)
+	public String manager_CounselLists() {
+		log.info("CounselController manager_CounselLists (담당자) 상담 예약 글 목록");
+
+		return "";
+	}
 	
 	
 	
