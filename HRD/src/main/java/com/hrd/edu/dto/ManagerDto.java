@@ -49,6 +49,15 @@ public class ManagerDto {
 		this.id = id;
 	}
 
+	public String getM_id() {
+		return id;
+	}
+
+
+	public void setM_id(String id) {
+		this.id = id;
+	}
+
 
 	public String getInst_ino() {
 		return inst_ino;
