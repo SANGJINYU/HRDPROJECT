@@ -24,18 +24,53 @@ function loginForm(){
 	console.log(frm);
 		
 	
-	if(id.value == "" || pw.value==""){
+//	if(id.value == "" || pw.value==""){
+//		alert("로그인 정보를 입력해주세요");
+//		id.focus();
+//	}else if(rdo[0].checked){ //사용자 체크
+//		frm.action= "./memberLogin.do";
+//		frm.method="post";
+//		frm.submit();
+//	}else if(rdo[1].checked){// 담당자 체크
+//		frm.action="./managerLogin.do";
+//		frm.method="post";
+//		frm.submit();
+//	}
+
+if(id.value == "" || pw.value==""){
 		alert("로그인 정보를 입력해주세요");
 		id.focus();
-	}else if(rdo[0].checked){ //사용자 체크
-		frm.action= "./memberLogin.do";
-		frm.method="post";
-		frm.submit();
-	}else if(rdo[1].checked){// 담당자 체크
-		frm.action="./managerLogin.do";
+	}else if(rdo[0].checked){
+		$.ajax({
+			type:"post",
+			url:"./loginCheck.do",
+			data:"id="+id.value+"&pw="+pw.value,
+			success:function(msg){
+				
+				if(msg.result =="성공"){
+							frm.action= "./memberLogin.do";
+							frm.method="post";
+							frm.submit();
+					}else{
+						alert("로그인 정보가 일치하지 않습니다")
+						document.getElementById("id").value ='';
+						document.getElementById("pw").value ='';
+						return false;
+					}		
+			},
+			error:function(){
+				
+					alert("로그인에 문제가 있습니다.")
+			}
+		})
+	}else if(rdo[1].checked){
+			frm.action="./managerLogin.do";
 		frm.method="post";
 		frm.submit();
 	}
+	
+
+
 }
 
 

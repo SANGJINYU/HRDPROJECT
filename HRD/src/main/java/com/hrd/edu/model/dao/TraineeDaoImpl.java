@@ -23,8 +23,8 @@ public class TraineeDaoImpl implements ITraineeDao {
 	}
 
 	@Override
-	public TraineeDto trainee_Login(TraineeDto dto) {
-		return session.selectOne(NS+"trainee_Login", dto);
+	public TraineeDto trainee_Login(Map<String, Object> map) {
+		return session.selectOne(NS+"trainee_Login", map);
 	}
 
 	@Override

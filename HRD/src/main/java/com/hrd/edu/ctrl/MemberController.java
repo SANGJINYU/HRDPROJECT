@@ -1,5 +1,8 @@
 package com.hrd.edu.ctrl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hrd.edu.dto.TraineeDto;
@@ -36,25 +40,38 @@ public class MemberController {
 		logger.info("MemberController loginForm 이동");
 		return "loginForm";
 	}
-	
-	
-	@RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST)
-	public String login(TraineeDto dto, HttpSession session,String id, String pw) {
-		
-		logger.info("MemberController 로그인 {}	", dto);
 
-		TraineeDto tDto = service.trainee_Login(dto);
-		System.out.println(tDto);
+	@RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST )
+	public String login(@RequestParam Map<String, Object> map, HttpSession session) {
 		
-		if(tDto == null) {
+		logger.info("MemberController 로그인  {}	", map);
+		
+		TraineeDto dto = service.trainee_Login(map);
 
-			return "redirect:/logout.do";
+			session.setAttribute("t_info", dto);
+
+			return "redirect:/traineeMain.do";
+	
+	}
+	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String,String>loginCheckMap(@RequestParam Map<String,Object>iMap){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		
+		TraineeDto dto =  service.trainee_Login(iMap);
+		logger.info("Member_Controller loginCheckMap 로그인된 값 : {}", dto);
+		
+		if(dto == null) {
+			map.put("result", "실패");
 			
 		}else {
-			session.setAttribute("t_info", tDto);
-			return "redirect:/traineeMain.do";
+			map.put("result", "성공");
 		}
+		return map;
 	}
+	
+	
 	
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
@@ -91,6 +108,8 @@ public class MemberController {
 	@RequestMapping(value = "/signUpForm.do", method = RequestMethod.POST)
 	public String signUpForm(TraineeDto dto) {
 		
+		logger.info("MemberController signUpForm {} ",dto);
+		
 		boolean isc = service.trainee_Insert(dto);
 		
 		if(isc) {
@@ -99,11 +118,20 @@ public class MemberController {
 			
 		}else {
 			
-			return "javascript:alert('회원가입실패하셨어요')";
+			return "redirect:/signUp.do";
 			
 		}
+	}
+	
+	
+	@RequestMapping(value = "/traineeInfo.do", method = RequestMethod.GET)
+	public String detailInfo(HttpSession session) {
+		
+		logger.info("MemberController detailInfo");
 		
 		
+				
+		return "traineeInfo";
 	}
 	
 }

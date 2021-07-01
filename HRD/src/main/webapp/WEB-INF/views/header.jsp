@@ -9,9 +9,9 @@
 <link rel="stylesheet" type="text/css"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 <link rel="stylesheet" type="text/css" href="./css/Counsel.css">
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js""></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="./js/login.js"></script>
-
+<script type="text/javascript" src="./js/traineeInfo.js"></script>
 
 </head>
 <header>
@@ -35,7 +35,7 @@
       </c:if>
       <c:if test="${t_info != null && m_info == null}">
       <ul class="nav navbar-nav navbar-left">
-      <li><a><span>${t_info.name}님 환영합니다</span></a></li>
+      <li><a href="./traineeInfo.do"><span>${t_info.name}님 환영합니다</span></a></li>
       <li><a href="./logout.do"><span class="glyphicon glyphicon-log-out"></span>로그아웃</a></li>
       </ul>
       </c:if>
