@@ -19,7 +19,7 @@ INSERT INTO MANAGER (ID,INST_INO,PASSWORD,NAME,EMAIL,PHONE,AUTH)
 <select id="manager_Login" parameterType="manager_Dto" resultType="manager_Dto">
 SELECT ID, INST_INO ,PASSWORD ,NAME ,EMAIL ,PHONE ,AUTH
         FROM MANAGER m 
-        WHERE ID=#{id} AND PASSWORD =#{password} AND AUTH != 'N'
+        WHERE ID=#{id} AND PASSWORD =#{pw} AND AUTH != 'N'
 </select>
 
 
@@ -33,7 +33,7 @@ SELECT COUNT(ID)
 
 <!-- 마스터가 (담당자)목록보기 -->
 <select id="manager_ManagerList" parameterType="java.lang.String" resultType="manager_Dto">
-SELECT ID,INST_INO,AUTH
+SELECT ID ,NAME ,EMAIL ,PHONE ,AUTH
         FROM MANAGER m 
         WHERE INST_INO =#{inst_ino}
 </select>

@@ -44,6 +44,7 @@ height: 300px;
     <input class="btn btn-info" type="button" name="signUp" value="회원가입" onclick="location.href='./signUp.do'">
     <input class="btn btn-warning"  type="button" value="아이디 찾기">
 	<input class="btn btn-danger" type="button" value="비밀번호 찾기">
+	<a href="./managerSignUpForm.do">담당자 회원가입</a>
   </form>
   </div>
 </div>

@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 <style type="text/css">
  #tb{
- 	width: 500px;
+ 	width: 700px;
  	margin: 200px auto;
+ 	text-align: center;
  }
  
  th, td{
@@ -20,13 +21,16 @@
 </style>
 </head>
 <body>
+${m_list}
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div id="container">
 <table id="tb">
 	<tr>
 		<th>연번</th>
 		<th>아이디</th>
-		<th>기관번호</th>
+		<th>이름</th>
+		<th>이메일</th>
+		<th>전화번호</th>
 		<th>권한</th>
 		<th>권한변경</th>
 	</tr>
@@ -34,10 +38,12 @@
 	<tr>
 		<td>${vs.count}</td>
 		<td>${d.id}</td>
-		<td>${d.inst_ino}</td>
+		<td>${d.name}</td>
+		<td>${d.email}</td>
+		<td>${d.phone}</td>
 		<td>${d.auth}</td>
 		<td> 
-			<c:if test="">
+			<c:if test="${d.auth != 'M'}">
 			<select>
 				<option selected="selected">수정</option>
 				<option value="Y">Y</option>

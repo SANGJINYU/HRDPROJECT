@@ -12,7 +12,7 @@
 <div>
 <div class="container" style="width: 400px;">
   <h2>회원가입</h2>
-  <form action="./signUpForm.do" method="post">
+  <form action="./masterInsert.do" method="post">
     <div class="form-group">
       <label for="id">아이디:</label>
       <input type="text" class="form-control" id="id" name="id">

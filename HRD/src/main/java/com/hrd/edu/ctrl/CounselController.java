@@ -34,12 +34,17 @@ private Logger log = LoggerFactory.getLogger(this.getClass());
 	public String counselCalendar(@RequestParam Map<String, Object> map,  HttpSession session) {
 		log.info("CounselController counselCalendar 상담 예약 달력 게시판 메인페이지 {}",map);
 		
+
+//		CounselDto2 dto = null;
+//		cdto.getMdate();
+//		map.put("yyyymm", "202107");
+
 //		System.out.println(cdto.getcListMdate());
 //		
 //		dto.setMdate(cdto.getMdate());
 //		String yyyymm = dto.getMdate();
 //		System.out.println(yyyymm);
-		System.out.println(map);
+//		System.out.println(map);
 		
 		
 //		map.put("yyyymm", year+date);

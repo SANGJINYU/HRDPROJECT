@@ -68,6 +68,14 @@ public class ManagerDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getPw() {
+		return password;
+	}
+	
+	
+	public void setPw(String pw) {
+		this.password = pw;
+	}
 
 
 	public String getName() {

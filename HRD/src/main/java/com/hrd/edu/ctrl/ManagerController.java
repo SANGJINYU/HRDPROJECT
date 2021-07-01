@@ -26,7 +26,7 @@ public class ManagerController {
 	private IManagerService mService;
 	
 	//마스터 회원가입 페이지로 이동
-	@RequestMapping(value = "/masterSignupForm.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/managerSignUpForm.do", method = RequestMethod.GET)
 	public String signupForm() {
 		log.info("마스터 회원가입 페이지로 이동");
 		return "managerSignUpForm";
