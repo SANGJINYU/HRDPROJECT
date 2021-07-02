@@ -55,10 +55,10 @@
 %>
 <div id="container">
 <h2 style="text-align: center;"> 상담 일정 예약 게시판 </h2>
-${t_info}<br>
-${m_info}<br>
-${cList}<br>
-${m_info.auth}
+<%-- ${t_info}<br> --%>
+<%-- ${m_info}<br> --%>
+<%-- ${cList}<br> --%>
+<%-- ${m_info.auth} --%>
 	<table id="calendar">
 		<caption style="text-align: center;font-size:17pt;">
 				<a href="./counselCalendar.do?year=<%=year-1%>&month=<%=month%>">◁</a>
