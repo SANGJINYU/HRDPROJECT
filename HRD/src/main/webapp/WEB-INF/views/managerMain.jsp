@@ -23,8 +23,8 @@
 </style>
 </head>
 <body>
-${m_info}
 <%@include file="/WEB-INF/views/header.jsp" %>
+<%-- ${m_info} --%>
 <div id="container">
 <table id="tb">
 	<tr>
